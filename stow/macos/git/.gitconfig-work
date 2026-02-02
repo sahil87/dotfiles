@@ -9,11 +9,3 @@
 [url "git@github.com-work:sahil-weaver"]
 	insteadOf = git@github.com:sahil-weaver
 	insteadOf = https://github.com/sahil-weaver/
-
-[url "git@github.com-work:dk-weaver"]
-	insteadOf = git@github.com:dk-weaver
-	insteadOf = https://github.com/dk-weaver/
-
-[url "git@github.com-work:rafa-weaver"]
-	insteadOf = git@github.com:rafa-weaver
-	insteadOf = https://github.com/rafa-weaver/
