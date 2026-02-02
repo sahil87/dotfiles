@@ -80,3 +80,25 @@ peek() {
 alias saves='git stash list'
 # Fix terminal state (after binary abrupt ssh connectino with mouse on messes it up)
 alias fix='stty sane; printf "\e[?1000l\e[?1002l\e[?1003l\e[?1006l"; clear'
+
+# AI Agent Usage Tracking {{{
+# Claude Code
+alias ccu='npx ccusage@latest'
+alias ccud='npx ccusage@latest daily'
+alias ccum='npx ccusage@latest monthly'
+alias ccus='npx ccusage@latest session'
+alias ccub='npx ccusage@latest blocks'
+
+# OpenAI Codex CLI
+alias codexu='npx @ccusage/codex@latest'
+alias codexud='npx @ccusage/codex@latest daily'
+alias codexum='npx @ccusage/codex@latest monthly'
+
+# OpenCode
+alias ocu='npx @ccusage/opencode@latest'
+alias ocud='npx @ccusage/opencode@latest daily'
+alias ocum='npx @ccusage/opencode@latest monthly'
+
+# All agents daily summary (quick check)
+alias aiu='echo "=== Claude Code ===" && npx ccusage@latest daily; echo "\n=== Codex ===" && npx @ccusage/codex@latest daily 2>/dev/null || echo "No Codex data"'
+# }}}
