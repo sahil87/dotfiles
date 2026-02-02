@@ -44,7 +44,6 @@ cd stow/macos
 ./dotinstall.sh git ssh zsh # or --all
 ```
 
-
 ## 6. Verify SSH setup
 
 ```bash
@@ -74,6 +73,13 @@ cd $DOTFILES_DIR/scripts/macinstall
 ```bash
 ls "${XDG_DATA_HOME:-$HOME/.local/share}/zap" # Check if zap is already installed
 zsh <(curl -s https://raw.githubusercontent.com/zap-zsh/zap/master/install.zsh)
+```
+
+## 10. Install additional dotfiles with stow
+
+```bash
+cd $LIFETRACKER_DIR/stow/macos
+./dotinstall.sh graphite npm
 ```
 
 ## Notes (optional)
