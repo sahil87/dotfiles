@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# Pull SSH keys from Mac Mini via Tailscale
+# Pull SSH keys from remote server via Tailscale
 # Prerequisite: Tailscale connected (run setup-tailscale.sh first)
 
 KEY_SOURCE="sahils-mac-mini.bat-ordinal.ts.net"
@@ -28,7 +28,7 @@ check_tailscale() {
         error "Tailscale not connected. Run setup-tailscale.sh first."
     fi
 
-    if ! tailscale ping -c 1 "$KEY_SOURCE" &> /dev/null; then
+    if ! ping -c 1 -W 5 "$KEY_SOURCE" &> /dev/null; then
         error "Cannot reach $KEY_SOURCE via Tailscale. Is the Mac Mini online?"
     fi
 }
@@ -73,9 +73,8 @@ pull_keys() {
 print_next_steps() {
     echo
     info "Next steps:"
-    echo "  1. Update ~/.ssh/config to remove IdentityAgent lines (if ditching 1Password agent)"
-    echo "  2. Test: ssh -T git@github.com"
-    echo "  3. Test: ssh -T git@github.com-work"
+    echo "  1. Test: ssh -T git@github.com"
+    echo "  2. Test: ssh -T git@github.com-work"
 }
 
 main() {

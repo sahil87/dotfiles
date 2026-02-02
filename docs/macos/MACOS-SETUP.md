@@ -41,7 +41,7 @@ The script will:
 
 ```bash
 cd stow/macos
-./dotinstall.sh git ssh zsh # or --all
+./stowhelper.sh git ssh zsh # or --all
 ```
 
 ## 6. Verify SSH setup
@@ -79,7 +79,7 @@ zsh <(curl -s https://raw.githubusercontent.com/zap-zsh/zap/master/install.zsh)
 
 ```bash
 cd $LIFETRACKER_DIR/stow/macos
-./dotinstall.sh graphite npm
+./stowhelper.sh graphite npm
 ```
 
 ## Notes (optional)
