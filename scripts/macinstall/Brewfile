@@ -1,0 +1,127 @@
+# Brewfile - Single source of truth for macinstall.sh
+# Category format: # === CATEGORY: Name | type | default | description ===
+# Types: brew, cask, mas
+# Default: y (install by default) or n (skip by default)
+
+# === CATEGORY: Core Tools | brew | y | Essential CLI tools for development and system management ===
+brew "mas"
+# brew "git" # Installed via xcode-select --install earlier
+brew "stow"
+brew "coreutils"
+brew "gh"
+brew "jq"
+brew "yq"
+brew "tree"
+brew "fzf"
+brew "btop"
+brew "byobu"
+brew "nvm"
+brew "ffmpeg"
+brew "mtr"
+brew "direnv"
+brew "gitleaks"
+brew "pre-commit"
+# brew "jeffreywildman/virt-manager"
+brew "withgraphite/tap/graphite"
+brew "opencode" #brew install anomalyco/tap/opencode for instant updates	
+# === END CATEGORY ===
+
+# === CATEGORY: Nerd Fonts | cask | y | Programming fonts with icon support ===
+cask "font-cascadia-code-nf"
+cask "font-cascadia-mono-nf"
+cask "font-fira-code-nerd-font"
+cask "font-monaspice-nerd-font"
+cask "font-jetbrains-mono-nerd-font"
+# === END CATEGORY ===
+
+# === CATEGORY: Development Tools | cask | y | IDEs, Docker, and development utilities ===
+cask "cursor"
+cask "visual-studio-code"
+cask "github"
+# === END CATEGORY ===
+
+# === CATEGORY: Development Tools - Desktop Only | brew | y | CLI tools for VM development ===
+cask "docker"
+# === END CATEGORY ===
+
+# === CATEGORY: Development Tools - VM Only | brew | y | CLI tools for VM development ===
+brew "docker"
+# === END CATEGORY ===
+
+# === CATEGORY: Browsers | cask | y | ===
+cask "google-chrome"
+cask "vivaldi"
+# === END CATEGORY ===
+
+# === CATEGORY: Productivity | cask | y | Note-taking, task management, and window management ===
+# 1password installed separately (requires manual setup first)
+cask "notion"
+cask "linear-linear"
+cask "sunsama"
+cask "bartender"
+cask "slack"
+# === END CATEGORY ===
+
+# === CATEGORY: Utilities | cask | y | Terminal, VPN, system monitoring, and misc tools ===
+cask "emacs-app"
+cask "ghostty"
+cask "tailscale"
+cask "protonvpn"
+cask "stats"
+# === END CATEGORY ===
+
+# === CATEGORY: AI Tools | cask | y | ===
+cask "chatgpt"
+cask "claude"
+cask "codex"
+# === END CATEGORY ===
+
+# === CATEGORY: Microsoft Office | cask | n | ===
+cask "microsoft-office"
+# === END CATEGORY ===
+
+
+# === CATEGORY: Mac App Store - Niche Apps | mas | n | Specialized apps from Mac App Store ===
+mas "1Password for Safari", id: 1569813296
+mas "aSPICE", id: 1560593107
+mas "MarkChart", id: 6475648822
+# === END CATEGORY ===
+
+# === CATEGORY: Cloud Storage - Desktop Only | cask | y | Cloud storage solutions for desktop Mac ===
+cask "google-drive"
+cask "dropbox"
+cask "synology-drive"
+# === END CATEGORY ===
+
+# === CATEGORY: Productivity - Desktop Only | cask | y | Productivity and communication tools for desktop Mac ===
+cask "rectangle"
+cask "granola"
+cask "discord"
+cask "whatsapp"
+cask "zoom"
+cask "loom"
+# === END CATEGORY ===
+
+# === CATEGORY: System - Desktop Only | cask | n | Hardware-specific tools for desktop Mac ===
+cask "logi-options-plus"
+cask "balenaetcher"
+cask "wispr-flow"
+cask "spotify"
+# === END CATEGORY ===
+
+# === CATEGORY: Mac App Store - Desktop Only | mas | n | Remote access apps for desktop Mac ===
+mas "Jump Desktop", id: 524141863
+# mas "Screens 5", id: 1663047912
+# === END CATEGORY ===
+
+# === CATEGORY: Mac App Store - Apple Apps | mas | n | Requires being signed into Mac App Store ===
+## mas "Xcode", id: 497799835
+# mas "Keynote", id: 409183694
+# mas "Numbers", id: 409203825
+# mas "Pages", id: 409201541
+# mas "GarageBand", id: 682658836
+# mas "iMovie", id: 408981434
+# === END CATEGORY ===
+
+# Usage: brew bundle --file=Brewfile
+# Or use: ./macinstall.sh (interactive installation)
