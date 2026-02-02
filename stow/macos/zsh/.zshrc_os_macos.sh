@@ -3,9 +3,7 @@
 # macOS-specific configuration
 #
 # Setup instructions:
-# 1. Install zap: zsh <(curl -s https://raw.githubusercontent.com/zap-zsh/zap/master/install.zsh) --branch release-v1
-# 2. In ~/.zshrc, after zap initialization, add:
-#    source /Users/sahil/code/sahil87/myprofile/shell/myzsh_rc_macos.sh
+# Install zap: zsh <(curl -s https://raw.githubusercontent.com/zap-zsh/zap/master/install.zsh) --branch release-v1
 
 export CODE_DIR=`realpath $HOME/code`
 export SAHIL87_DIR=`realpath $HOME/code/sahil87`
