@@ -14,9 +14,6 @@
 [includeIf "hasconfig:remote.*.url:git@github.com:sahil-weaver*/**"]
   path = ~/.gitconfig-work
 
-[includeIf "hasconfig:remote.*.url:git@github.com:*-weaver*/**"]
-  path = ~/.gitconfig-work
-
 [includeIf "hasconfig:remote.*.url:git@github.com:wvrdz*/**"]
   path = ~/.gitconfig-work
 
