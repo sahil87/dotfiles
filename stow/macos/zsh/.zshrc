@@ -35,6 +35,7 @@ source $HOME/.zshrc_aliases.sh
 source $LIFETRACKER_DIR/secrets/zsh/.zshrc_secrets.sh
 
 export SSH_AUTH_SOCK=~/.1password/agent.sock
+
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 

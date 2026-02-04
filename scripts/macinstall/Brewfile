@@ -5,7 +5,8 @@
 
 # === CATEGORY: Core Tools | brew | y | Essential CLI tools for development and system management ===
 brew "mas"
-# brew "git" # Installed via xcode-select --install earlier
+brew "git" # Installed via xcode-select --install earlier
+brew "git-lfs"
 brew "stow"
 brew "coreutils"
 brew "gh"
