@@ -33,6 +33,8 @@ alias gp='git push'
 alias gaa='git add --all'
 alias gr="git remote"
 alias gcm='git commit -m'
+alias gco='git checkout'
+alias gb='git branch'
 
 alias gk='gitk --all&'
 alias gx='gitx --all'
