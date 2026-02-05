@@ -38,6 +38,8 @@ alias gr="git remote"
 alias gcm='git commit -m'
 alias gco='git checkout'
 alias gb='git branch'
+alias gst='git status'
+alias gcam='git commit -am'
 
 alias gk='gitk --all&'
 alias gx='gitx --all'

@@ -1,3 +1,11 @@
+# OPENSPEC:START
+# OpenSpec shell completions configuration
+# fpath=("/Users/sahil/.zsh/completions" $fpath)
+# autoload -Uz compinit
+# compinit
+# Commenting out - as its manageed below
+# OPENSPEC:END
+
 #export DIRENV_LOG_FORMAT=""
 eval "$(direnv hook zsh)"   # for zsh
 
