@@ -18,6 +18,13 @@ plug "zap-zsh/supercharge"
 plug "romkatv/powerlevel10k"
 # plug "zap-zsh/zap-prompt"
 
+case "$(uname)" in
+  Darwin) source $HOME/.zshrc_os_macos.sh ;;
+  Linux)  source $HOME/.zshrc_os_linux.sh ;;
+esac
+source $HOME/.zshrc_aliases.sh
+source $LIFETRACKER_DIR/secrets/zsh/.zshrc_secrets.sh
+
 # Load and initialise completion system (optimized for performance)
 autoload -Uz compinit
 # Only rebuild cache once per day
@@ -26,13 +33,6 @@ if [[ -n ${ZDOTDIR}/.zcompdump(#qN.mh+24) ]]; then
 else
   compinit -C
 fi
-
-case "$(uname)" in
-  Darwin) source $HOME/.zshrc_os_macos.sh ;;
-  Linux)  source $HOME/.zshrc_os_linux.sh ;;
-esac
-source $HOME/.zshrc_aliases.sh
-source $LIFETRACKER_DIR/secrets/zsh/.zshrc_secrets.sh
 
 export SSH_AUTH_SOCK=~/.1password/agent.sock
 

@@ -25,3 +25,7 @@ if command -v gt &> /dev/null; then
   fi
   [[ -f "$GT_COMPLETION_CACHE" ]] && source "$GT_COMPLETION_CACHE"
 fi
+
+# OpenSpec completions (fpath set here, compinit called later in .zshrc)
+OPENSPEC_COMPLETIONS_DIR="$HOME/.oh-my-zsh/custom/completions"
+[[ -d "$OPENSPEC_COMPLETIONS_DIR" ]] && fpath=("$OPENSPEC_COMPLETIONS_DIR" $fpath)
