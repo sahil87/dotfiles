@@ -8,6 +8,9 @@ alias .4='cd ../../../../' # Go back 4 directory levels
 alias .5='cd ../../../../../'   # Go back 5 directory levels
 alias .6='cd ../../../../../../'  # Go back 6 directory levels
 
+# Make a directory and cd into it
+take() { mkdir -p "$1" && cd "$1" }
+
 #Ls improvements
 alias ls='ls --color=auto'
 alias ll='ls -Fhl'
@@ -21,7 +24,7 @@ alias rm="nocorrect rm -i" #nocorrect doesn't work in bash
 alias cp="cp -i"
 alias mv="mv -i"
 
-#Git aliases. Rest defined in oh-my-zsh's git plugin
+#Git aliases
 # alias gs='git status' # Use gst
 # alias gcm='git commit -m' # Use gsam
 alias gloga='git log --oneline --decorate --graph --all'
