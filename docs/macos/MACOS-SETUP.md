@@ -82,6 +82,13 @@ cd $LIFETRACKER_DIR/stow/macos
 ./stowhelper.sh graphite npm
 ```
 
+## 11. Other tools
+
+```bash
+# https://github.com/iannuttall/ralph
+npm i -g @iannuttall/ralph
+```
+
 ## Notes (optional)
 
 ### Enable SSH Agent via 1Password
