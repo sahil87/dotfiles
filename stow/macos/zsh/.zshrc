@@ -26,10 +26,7 @@ plug "zap-zsh/supercharge"
 plug "romkatv/powerlevel10k"
 # plug "zap-zsh/zap-prompt"
 
-case "$(uname)" in
-  Darwin) source $HOME/.zshrc_os_macos.sh ;;
-  Linux)  source $HOME/.zshrc_os_linux.sh ;;
-esac
+source $HOME/.zshrc_os.sh
 source $HOME/.zshrc_aliases.sh
 source $LIFETRACKER_DIR/secrets/zsh/.zshrc_secrets.sh
 

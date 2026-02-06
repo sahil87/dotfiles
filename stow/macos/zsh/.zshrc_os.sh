@@ -1,6 +1,18 @@
 #!/bin/zsh
 
-# Common OS configuration (sourced by OS-specific files)
+# Common OS configuration
+# Import tree: .zshrc → _os → (_os_linux | _os_macos)
+
+# Directory exports
+export CODE_DIR="$HOME/code"
+export SAHIL87_DIR="$HOME/code/sahil87"
+export WEAVER_DIR="$HOME/code/weaver"
+
+# Source OS-specific config (sets NVM_SOURCE, PNPM_HOME, OS_PATH_EXTRAS)
+case "$(uname)" in
+  Darwin) source "${0:a:h}/.zshrc_os_macos.sh" ;;
+  Linux)  source "${0:a:h}/.zshrc_os_linux.sh" ;;
+esac
 
 # Directory aliases
 alias weaver="cd $WEAVER_DIR"
@@ -29,3 +41,21 @@ fi
 # OpenSpec completions (fpath set here, compinit called later in .zshrc)
 OPENSPEC_COMPLETIONS_DIR="$HOME/.oh-my-zsh/custom/completions"
 [[ -d "$OPENSPEC_COMPLETIONS_DIR" ]] && fpath=("$OPENSPEC_COMPLETIONS_DIR" $fpath)
+
+# NVM
+export NVM_DIR="$HOME/.nvm"
+[ -s "${NVM_SOURCE:-$NVM_DIR}/nvm.sh" ] && \. "${NVM_SOURCE:-$NVM_DIR}/nvm.sh"
+[ -s "${NVM_SOURCE:-$NVM_DIR}/bash_completion" ] && \. "${NVM_SOURCE:-$NVM_DIR}/bash_completion"
+[ -s "${NVM_SOURCE:-$NVM_DIR}/etc/bash_completion.d/nvm" ] && \. "${NVM_SOURCE:-$NVM_DIR}/etc/bash_completion.d/nvm"
+
+# pnpm
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+
+# Path (first match wins) - OS_PATH_EXTRAS set by OS-specific config
+path=($LIFETRACKER_DIR/bin $CODE_DIR/bin $OS_PATH_EXTRAS $path .)
+
+# Devshell
+[[ -f "$DEVSHELL_DIR/src/shell/dev.sh" ]] && source "$DEVSHELL_DIR/src/shell/dev.sh"
