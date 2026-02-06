@@ -19,10 +19,11 @@ alias sl="ls"
 alias l="ls"
 
 # Make these commands ask before clobbering a file. Use -f to override.
-alias rm="nocorrect rm -i" #nocorrect doesn't work in bash
-#alias rm="rm -i"
-alias cp="cp -i"
-alias mv="mv -i"
+# These aliases interfere with AI Agents, so removing
+# alias rm="nocorrect rm -i" #nocorrect doesn't work in bash
+# #alias rm="rm -i"
+# alias cp="cp -i"
+# alias mv="mv -i"
 
 #Git aliases
 # alias gs='git status' # Use gst
