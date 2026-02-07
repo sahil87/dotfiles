@@ -47,6 +47,8 @@
 # keybind = global:cmd+escape=toggle_visibility
 keybind = global:ctrl+escape=toggle_visibility
 
+# tell Ghostty to use a standard TERM value that the remote systems know about.
+term = xterm-256color
 clipboard-paste-protection = false
 
 # Fix for SSH echo duplication issue
