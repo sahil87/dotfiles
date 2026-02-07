@@ -55,7 +55,7 @@ ssh-copy-id username@remote-host
 ### Dev Tools
 ```bash
 # Essential packages
-sudo apt install -y git curl wget build-essential
+sudo apt install -y git curl wget build-essential stow
 
 # VSCode
 wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > packages.microsoft.gpg
@@ -65,7 +65,9 @@ sudo apt update && sudo apt install code -y
 
 # Node.js (via nvm)
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
-# Then: nvm install --lts
+nvm install --lts           # Install latest LTS version
+nvm alias default 'lts/*'   # Set it as default
+node --version              # Verify
 
 # Docker
 sudo apt install docker.io docker-compose -y
@@ -73,4 +75,65 @@ sudo usermod -aG docker $USER
 
 # Claude Code CLI
 npm install -g @anthropic-ai/claude-code
+```
+
+## 3. Clone dotfiles
+
+```bash
+mkdir -p ~/code/bootstrap
+git clone https://github.com/sahil87/dotfiles.git ~/code/bootstrap/dotfiles
+cd ~/code/bootstrap/dotfiles
+```
+
+## 4. Bootstrap SSH keys via Tailscale
+
+This pulls your private keys from a remote server over Tailscale.
+
+```bash
+./scripts/setup-tailscale.sh
+./scripts/pull-ssh-keys.sh
+```
+
+The script will:
+- Install Tailscale if not present
+- Prompt you to authenticate Tailscale
+- Pull keys from remote server
+
+## 5. Install dotfiles with stow
+
+```bash
+cd stow/macos
+./stowhelper.sh git ssh zsh # or --all
+```
+
+## 6. Verify SSH setup
+
+```bash
+#Verify:
+ssh -T git@github.com          # Personal GitHub
+ssh -T git@github.com-work     # Work GitHub
+```
+
+## 7. Clone additional repositories
+
+```bash
+cd ~/code/bootstrap
+git clone git@github.com:sahil87/lifetracker.git
+git clone git@github.com:sahil87/blog2020.git
+git clone git@github.com:sahil-weaver/prompt-pantry.git
+git clone git@github.com:wvrdz/dev-shell.git
+```
+
+## 8. Install Software Packages
+
+```bash
+cd $DOTFILES_DIR/scripts/macinstall
+./macinstall.sh install
+```
+
+## 9. Install Zap (Zsh Plugin Manager)
+
+```bash
+ls "${XDG_DATA_HOME:-$HOME/.local/share}/zap" # Check if zap is already installed
+zsh <(curl -s https://raw.githubusercontent.com/zap-zsh/zap/master/install.zsh)
 ```

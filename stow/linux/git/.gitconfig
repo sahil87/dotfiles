@@ -1,0 +1,86 @@
+# =============================================================================
+# Main Git Configuration
+# =============================================================================
+
+[user]
+  name = Sahil Ahuja
+  email = sahilahuja@gmail.com
+
+# =============================================================================
+# Conditional Configurations (work vs personal)
+# =============================================================================
+
+# Work account - Weaver (sahil-weaver, wvrdz)
+[includeIf "hasconfig:remote.*.url:git@github.com:sahil-weaver*/**"]
+  path = ~/.gitconfig-work
+
+[includeIf "hasconfig:remote.*.url:git@github.com:wvrdz*/**"]
+  path = ~/.gitconfig-work
+
+# Personal account (sahil87)
+[includeIf "hasconfig:remote.*.url:git@github.com:sahil87/**"]
+  path = ~/.gitconfig-personal
+
+# =============================================================================
+# Core Behavior
+# =============================================================================
+
+[init]
+  defaultBranch = main
+
+[push]
+  autoSetupRemote = true  # No more "git push -u origin branch" on first push
+  default = current
+
+[fetch]
+  prune = true  # Auto-cleanup stale remote branches
+
+[pull]
+  rebase = true
+
+[merge]
+  conflictstyle = zdiff3  # Better conflict resolution (Git 2.35+)
+
+[diff]
+  # algorithm = histogram
+  algorithm = myers # Default
+  mnemonicprefix = true
+
+[branch]
+  autosetuprebase = always
+  sort = -committerdate  # Most recent branches first in listings
+
+[tag]
+  sort = version:refname  # Smart version sorting (1.2, 1.10, etc.)
+
+[apply]
+  whitespace = nowarn
+
+[rerere]
+  enabled = true
+
+[rebase]
+  autosquash = true
+
+[help]
+  autocorrect = 10  # Auto-run typos after 1 second
+
+[core]
+  preloadindex = true  # Performance boost for status/diff
+
+# =============================================================================
+# Git LFS
+# =============================================================================
+
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+  required = true
+	process = git-lfs filter-process
+
+# =============================================================================
+# Aliases (loaded from separate file)
+# =============================================================================
+
+[include]
+  path = ~/.gitconfig-aliases
