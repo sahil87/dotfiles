@@ -16,9 +16,18 @@ sudo apt install xubuntu-desktop -y
 ```bash
 sudo hostnamectl set-hostname new-hostname
 
+# Stop tailscale
 sudo tailscale down
-sudo rm -rf /var/lib/tailscale/tailscaled.state
-sudo tailscale up
+
+# Delete state AND cache
+sudo rm /var/lib/tailscale/tailscaled.state
+sudo rm -rf /var/cache/tailscale
+
+# Restart the daemon to pick up the cleared state
+sudo systemctl restart tailscaled
+
+# Re-authenticate (will prompt for login)
+sudo tailscale up --force-reauth
 ```
 
 ## Setup 
