@@ -55,7 +55,7 @@ ssh-copy-id username@remote-host
 ### Dev Tools
 ```bash
 # Essential packages
-sudo apt install -y git curl wget build-essential stow
+sudo apt install -y git curl wget build-essential stow zsh direnv
 
 # VSCode
 wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > packages.microsoft.gpg
@@ -102,9 +102,13 @@ The script will:
 ## 5. Install dotfiles with stow
 
 ```bash
-cd stow/macos
-./stowhelper.sh git ssh zsh # or --all
+cd stow/linux
+./stowhelper.sh git ssh zsh direnv # or --all
+
+# Switch default shell to zsh:
+chsh -s $(which zsh)
 ```
+Log out and back in for the change to take effect.
 
 ## 6. Verify SSH setup
 

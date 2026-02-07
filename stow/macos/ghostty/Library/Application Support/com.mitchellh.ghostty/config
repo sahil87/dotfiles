@@ -47,6 +47,13 @@
 # keybind = global:cmd+escape=toggle_visibility
 keybind = global:ctrl+escape=toggle_visibility
 
+clipboard-paste-protection = false
+
+# Fix for SSH echo duplication issue
+# Disable shell integration for SSH sessions to prevent double echo
+# shell-integration = none
+# shell-integration-features = no-cursor
+
 # Popular themes `ghostty +list-themes` to check all themes
 # Ghostty Theme Configuration
 # Uncomment ONE line to activate that theme
