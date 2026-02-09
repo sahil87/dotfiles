@@ -46,3 +46,6 @@ fi
 
 # Must be at the end
 plug "zsh-users/zsh-syntax-highlighting"
+
+# opencode
+export PATH=/home/parallels/.opencode/bin:$PATH
