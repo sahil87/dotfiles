@@ -26,6 +26,14 @@ plug "zap-zsh/supercharge"
 plug "romkatv/powerlevel10k"
 # plug "zap-zsh/zap-prompt"
 
+# Dev Shell
+export DEVSHELL_DIR="/home/parallels/code/bootstrap/dev-shell"
+source "$DEVSHELL_DIR/src/shell/dev.sh"
+# Prompt Pantry
+export PP_DIR="/home/parallels/code/bootstrap/prompt-pantry"
+source "$PP_DIR/shell/rc-init.sh"
+
+#The above exports are used here
 source $HOME/.zshrc_os.sh
 source $HOME/.zshrc_aliases.sh
 source $LIFETRACKER_DIR/secrets/zsh/.zshrc_secrets.sh
@@ -44,9 +52,6 @@ fi
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-# Dev Shell
-export DEVSHELL_DIR="/home/parallels/code/bootstrap/dev-shell"
-source "$DEVSHELL_DIR/src/shell/dev.sh"
 
 # opencode
 export PATH=/home/parallels/.opencode/bin:$PATH
@@ -61,6 +66,3 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 # Must be at the end
 plug "zsh-users/zsh-syntax-highlighting"
 
-# Prompt Pantry
-export PP_DIR="/home/parallels/code/bootstrap/prompt-pantry"
-source "$PP_DIR/shell/rc-init.sh"
