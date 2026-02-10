@@ -60,3 +60,7 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 
 # Must be at the end
 plug "zsh-users/zsh-syntax-highlighting"
+
+# Prompt Pantry
+export PP_DIR="/home/parallels/code/bootstrap/prompt-pantry"
+source "$PP_DIR/shell/rc-init.sh"
