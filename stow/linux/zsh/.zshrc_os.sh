@@ -57,5 +57,3 @@ esac
 # Path (first match wins) - OS_PATH_EXTRAS set by OS-specific config
 path=($LIFETRACKER_DIR/bin $CODE_DIR/bin $OS_PATH_EXTRAS $path .)
 
-# Devshell
-[[ -f "$DEVSHELL_DIR/src/shell/dev.sh" ]] && source "$DEVSHELL_DIR/src/shell/dev.sh"

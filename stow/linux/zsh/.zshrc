@@ -49,3 +49,14 @@ plug "zsh-users/zsh-syntax-highlighting"
 
 # opencode
 export PATH=/home/parallels/.opencode/bin:$PATH
+
+# bun completions
+[ -s "/home/parallels/.bun/_bun" ] && source "/home/parallels/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+
+# Dev Shell
+export DEVSHELL_DIR="/home/parallels/code/bootstrap/dev-shell"
+source "$DEVSHELL_DIR/src/shell/dev.sh"
