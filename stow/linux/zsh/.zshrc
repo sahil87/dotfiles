@@ -44,8 +44,9 @@ fi
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-# Must be at the end
-plug "zsh-users/zsh-syntax-highlighting"
+# Dev Shell
+export DEVSHELL_DIR="/home/parallels/code/bootstrap/dev-shell"
+source "$DEVSHELL_DIR/src/shell/dev.sh"
 
 # opencode
 export PATH=/home/parallels/.opencode/bin:$PATH
@@ -57,6 +58,5 @@ export PATH=/home/parallels/.opencode/bin:$PATH
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 
-# Dev Shell
-export DEVSHELL_DIR="/home/parallels/code/bootstrap/dev-shell"
-source "$DEVSHELL_DIR/src/shell/dev.sh"
+# Must be at the end
+plug "zsh-users/zsh-syntax-highlighting"

@@ -44,5 +44,9 @@ fi
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
+# Dev Shell
+export DEVSHELL_DIR="/home/parallels/code/bootstrap/dev-shell"
+source "$DEVSHELL_DIR/src/shell/dev.sh"
+
 # Must be at the end
 plug "zsh-users/zsh-syntax-highlighting"
