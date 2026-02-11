@@ -54,3 +54,11 @@ fi
 
 # Must be at the end
 plug "zsh-users/zsh-syntax-highlighting"
+
+# Prompt Pantry
+export PP_DIR="/Users/sahil/code/bootstrap/prompt-pantry"
+source "$PP_DIR/shell/rc-init.sh"
+
+# Dev Shell
+export DEVSHELL_DIR="/Users/sahil/code/bootstrap/dev-shell"
+source "$DEVSHELL_DIR/src/shell/dev.sh"
