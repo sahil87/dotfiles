@@ -14,10 +14,10 @@ sudo apt install xubuntu-desktop -y
 ## On Cloning a VM
 
 ```bash
-sudo hostnamectl set-hostname new-hostname
-
 # Stop tailscale
 sudo tailscale down
+
+sudo hostnamectl set-hostname new-hostname
 
 # Delete state AND cache
 sudo rm /var/lib/tailscale/tailscaled.state
