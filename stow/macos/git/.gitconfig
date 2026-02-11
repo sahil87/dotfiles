@@ -3,8 +3,8 @@
 # =============================================================================
 
 [user]
-  name = Sahil Ahuja
-  email = sahilahuja@gmail.com
+	name = Sahil Ahuja
+	email = sahilahuja@gmail.com
 
 # =============================================================================
 # Conditional Configurations (work vs personal)
