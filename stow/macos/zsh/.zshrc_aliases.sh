@@ -60,7 +60,7 @@ alias mux='tmuxinator'
 alias gpg2='gpg'
 
 #Claude
-alias clauded='claude --allow-dangerously-skip-permissions'
+alias clauded='claude --dangerously-skip-permissions'
 
 # Save a checkpoint (snapshot current state, keep working)
 save() {
