@@ -63,6 +63,8 @@ export PATH=/home/parallels/.opencode/bin:$PATH
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv zsh)"
+
 # Must be at the end
 plug "zsh-users/zsh-syntax-highlighting"
 

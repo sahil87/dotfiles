@@ -3,8 +3,8 @@
 # =============================================================================
 
 [user]
-  name = Sahil Ahuja
-  email = sahilahuja@gmail.com
+	name = Test User
+	email = test@example.com
 
 # =============================================================================
 # Conditional Configurations (work vs personal)
