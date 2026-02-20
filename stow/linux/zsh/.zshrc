@@ -6,9 +6,6 @@
 # Commenting out - as its manageed below
 # OPENSPEC:END
 
-#export DIRENV_LOG_FORMAT=""
-eval "$(direnv hook zsh)"   # for zsh
-
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -64,6 +61,10 @@ export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv zsh)"
+
+# We want this hook as late as possible so that any preivous .envrc files aren't picked up. 
+#export DIRENV_LOG_FORMAT=""
+eval "$(direnv hook zsh)"   # for zsh
 
 # Must be at the end
 plug "zsh-users/zsh-syntax-highlighting"
