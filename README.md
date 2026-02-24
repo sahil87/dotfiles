@@ -18,4 +18,3 @@ See [stow/README.md](stow/README.md) for instructions on installing dotfiles usi
 ## SSH Key Bootstrap
 
 See [docs/SSH-BOOTSTRAP-NOTES.md](docs/SSH-BOOTSTRAP-NOTES.md) for how to bootstrap SSH keys on a new machine using Tailscale.
-
