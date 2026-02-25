@@ -38,9 +38,19 @@ if command -v gt &> /dev/null; then
   [[ -f "$GT_COMPLETION_CACHE" ]] && source "$GT_COMPLETION_CACHE"
 fi
 
-# OpenSpec completions (fpath set here, compinit called later in .zshrc)
-OPENSPEC_COMPLETIONS_DIR="$HOME/.oh-my-zsh/custom/completions"
-[[ -d "$OPENSPEC_COMPLETIONS_DIR" ]] && fpath=("$OPENSPEC_COMPLETIONS_DIR" $fpath)
+# fpath completions (compinit called later in .zshrc)
+# Tools that output #compdef functions (e.g. just) must go via fpath, not source
+COMPLETIONS_DIR="$HOME/.oh-my-zsh/custom/completions"
+mkdir -p "$COMPLETIONS_DIR"
+
+# Just completions (cached, regenerated weekly)
+if command -v just &> /dev/null; then
+  if [[ ! -f "$COMPLETIONS_DIR/_just" ]] || [[ $(find "$COMPLETIONS_DIR/_just" -mtime +7 2>/dev/null) ]]; then
+    just --completions zsh > "$COMPLETIONS_DIR/_just" 2>/dev/null
+  fi
+fi
+
+fpath=("$COMPLETIONS_DIR" $fpath)
 
 # NVM
 export NVM_DIR="$HOME/.nvm"

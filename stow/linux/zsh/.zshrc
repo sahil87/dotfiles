@@ -38,7 +38,7 @@ source $LIFETRACKER_DIR/secrets/zsh/.zshrc_secrets.sh
 # Load and initialise completion system (optimized for performance)
 autoload -Uz compinit
 # Only rebuild cache once per day
-if [[ -n ${ZDOTDIR}/.zcompdump(#qN.mh+24) ]]; then
+if [[ -n ${ZDOTDIR:-$HOME}/.zcompdump(#qN.mh+24) ]]; then
   compinit
 else
   compinit -C
