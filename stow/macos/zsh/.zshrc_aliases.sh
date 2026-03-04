@@ -46,6 +46,7 @@ gaap() { git add --all && git commit -m "${1:?Usage: gaap \"commit message\"}" &
 alias gk='gitk --all&'
 alias gx='gitx --all'
 alias c='cd ~/code/'
+alias icloud='cd ~/Library/Mobile\ Documents/com~apple~CloudDocs'
 
 alias p8='ping 8.8.8.8'
 alias install='sudo apt-get install'

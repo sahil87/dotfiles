@@ -1,14 +1,11 @@
 #!/usr/bin/env bash
+# Shared library for cloning SSH keys from remote server via Tailscale
+# Prerequisite: Tailscale connected (run setup-tailscale.sh first)
+# Usage: source this file, set SSH_KEYS array, then call clone_sshkeys
+
 set -euo pipefail
 
-# Pull SSH keys from remote server via Tailscale
-# Prerequisite: Tailscale connected (run setup-tailscale.sh first)
-
 KEY_SOURCE="sahils-mac-mini.bat-ordinal.ts.net"
-SSH_KEYS=(
-    "id_ed25519_sahil-weaver"
-    "id_ed25519_sahil87"
-)
 
 RED='\033[0;31m'
 GREEN='\033[0;32m'
@@ -77,7 +74,7 @@ print_next_steps() {
     echo "  2. Test: ssh -T git@github.com-work"
 }
 
-main() {
+clone_sshkeys() {
     echo "=== Pull SSH Keys via Tailscale ==="
     echo
     check_tailscale
@@ -85,5 +82,3 @@ main() {
     pull_keys
     print_next_steps
 }
-
-main "$@"
