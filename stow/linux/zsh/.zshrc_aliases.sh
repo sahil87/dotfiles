@@ -90,6 +90,10 @@ alias saves='git stash list'
 # Fix terminal state (after binary abrupt ssh connectino with mouse on messes it up)
 alias fix='stty sane; printf "\e[?1000l\e[?1002l\e[?1003l\e[?1006l"; clear'
 
+# Set terminal tab/window title
+tabname() { printf '\033]2;%s\007' "$*"; }
+alias tn='tabname'
+
 # AI Agent Usage Tracking {{{
 # Claude Code
 alias ccu='npx ccusage@latest'
