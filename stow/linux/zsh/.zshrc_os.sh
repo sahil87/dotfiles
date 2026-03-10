@@ -65,5 +65,5 @@ case ":$PATH:" in
 esac
 
 # Path (first match wins) - OS_PATH_EXTRAS set by OS-specific config
-path=($LIFETRACKER_DIR/bin $CODE_DIR/bin $OS_PATH_EXTRAS $path .)
+path=($HOME/.cargo/bin $LIFETRACKER_DIR/bin $CODE_DIR/bin $OS_PATH_EXTRAS $path .)
 
