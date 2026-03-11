@@ -52,6 +52,8 @@ sudo dpkg -i nomachine_*.deb
 sudo sed -i 's|^#*DefaultDesktopCommand.*|DefaultDesktopCommand "/usr/bin/startxfce4"|' /usr/NX/etc/node.cfg
 ```
 
+In the NoMachine client menu (top-right peel or Ctrl+Alt+0), go to **Display** and enable **"Resize the remote display"** to auto-match resolution to the client window.
+
 ### Setup Remote Access (VNC)
 
 On the Ubuntu VM:
