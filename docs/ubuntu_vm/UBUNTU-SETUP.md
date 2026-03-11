@@ -38,7 +38,7 @@ curl -fsSL https://tailscale.com/install.sh | sh
 sudo tailscale up
 ```
 
-### Setup Remote Access
+### Setup Remote Access (NoMachine)
 * Download the arm64 .deb from : https://download.nomachine.com/download/?id=30&platform=linux&distro=arm
 ```bash
 # wget https://web9001.nomachine.com/download/9.3/Linux/nomachine_9.3.7_1_amd64.deb
@@ -48,6 +48,35 @@ sudo tailscale up
 # sudo dpkg -i nomachine_9.3.7_1_arm64.deb
 sudo dpkg -i nomachine_*.deb
 ```
+
+### Setup Remote Access (VNC)
+
+On the Ubuntu VM:
+```bash
+sudo apt install -y tigervnc-standalone-server tigervnc-xorg-extension
+vncpasswd  # set a VNC password
+
+# Start VNC server on display :1 (port 5901)
+vncserver :1 -localhost no -geometry 1920x1080 -depth 24
+
+# Stop it
+vncserver -kill :1
+```
+
+If XFCE doesn't launch automatically, create `~/.vnc/xstartup`:
+```bash
+#!/bin/sh
+unset SESSION_MANAGER
+unset DBUS_SESSION_BUS_ADDRESS
+exec startxfce4
+```
+Then `chmod +x ~/.vnc/xstartup` and restart the server.
+
+From macOS, connect via Tailscale:
+```bash
+open vnc://ubuntu-vm2.bat-ordinal.ts.net:5901
+```
+This opens the built-in Screen Sharing app. Port 5901 = display :1, 5902 = display :2, etc.
 
 ### SSH Setup
 
