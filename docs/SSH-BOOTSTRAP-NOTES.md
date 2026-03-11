@@ -13,6 +13,7 @@ New machines need SSH keys but can't pull them without authentication — a catc
 ./scripts/clone-sshkeys-all.sh     # Pull all keys (sahil-weaver, sahil87, ss)
 ./scripts/clone-sshkeys-edge.sh    # Pull edge keys only (sahil-weaver, sahil87)
 ./scripts/authorize-ss-key.sh      # Add ss public key to local authorized_keys
+./scripts/clone-sshconfig-init.sh  # Copy starter ~/.ssh/config for the cloned keys
 ```
 
 - **all** vs **edge**: Use `clone-sshkeys-all.sh` on primary machines that need every key. Use `clone-sshkeys-edge.sh` on edge/secondary machines that only need GitHub keys.
