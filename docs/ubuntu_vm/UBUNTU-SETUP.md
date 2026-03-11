@@ -41,6 +41,9 @@ sudo tailscale up
 ### Setup Remote Access
 * Download the arm64 .deb from : https://download.nomachine.com/download/?id=30&platform=linux&distro=arm
 ```bash
+# wget https://web9001.nomachine.com/download/9.3/Linux/nomachine_9.3.7_1_amd64.deb
+# sudo dpkg -i nomachine_9.3.7_1_amd64.deb
+# --- OR ---
 # wget https://download.nomachine.com/download/9.3/Arm/nomachine_9.3.7_1_arm64.deb
 # sudo dpkg -i nomachine_9.3.7_1_arm64.deb
 sudo dpkg -i nomachine_*.deb
