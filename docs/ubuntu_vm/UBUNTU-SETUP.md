@@ -47,6 +47,9 @@ sudo tailscale up
 # wget https://download.nomachine.com/download/9.3/Arm/nomachine_9.3.7_1_arm64.deb
 # sudo dpkg -i nomachine_9.3.7_1_arm64.deb
 sudo dpkg -i nomachine_*.deb
+
+# Force NoMachine to use XFCE instead of GNOME
+sudo sed -i 's|^#*DefaultDesktopCommand.*|DefaultDesktopCommand "/usr/bin/startxfce4"|' /usr/NX/etc/node.cfg
 ```
 
 ### Setup Remote Access (VNC)
