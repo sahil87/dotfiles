@@ -54,5 +54,8 @@ case ":$PATH:" in
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 
+# Go
+[[ -d "$HOME/go/bin" ]] && GO_BIN="$HOME/go/bin"
+
 # Path (first match wins) - OS_PATH_EXTRAS set by OS-specific config
-path=($HOME/go/bin $HOME/.cargo/bin $LIFETRACKER_DIR/bin $CODE_DIR/bin $OS_PATH_EXTRAS $path .)
+path=($GO_BIN $HOME/.cargo/bin $LIFETRACKER_DIR/bin $CODE_DIR/bin $OS_PATH_EXTRAS $path .)
