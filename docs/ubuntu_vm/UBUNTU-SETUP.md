@@ -104,7 +104,10 @@ ssh-copy-id username@remote-host
 sudo apt install -y git curl wget build-essential stow zsh direnv
 
 # Linuxbrew
+git config --global merge.conflictstyle diff3 #downgrade diff algo temporarily
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+brew install git #git 2.3+ supports zdiff3
+git config --global merge.conflictstyle zdiff3
 
 # GitHub CLI
 (type -p wget >/dev/null || (sudo apt update && sudo apt-get install wget -y)) \
