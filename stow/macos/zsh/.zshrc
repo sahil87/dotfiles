@@ -25,11 +25,11 @@ plug "romkatv/powerlevel10k"
 
 # Prompt Pantry
 export PP_DIR="/Users/sahil/code/bootstrap/prompt-pantry"
-source "$PP_DIR/shell/rc-init.sh"
+[[ -f "$PP_DIR/shell/rc-init.sh" ]] && source "$PP_DIR/shell/rc-init.sh"
 
 # Dev Shell
 export DEVSHELL_DIR="/Users/sahil/code/bootstrap/dev-shell"
-source "$DEVSHELL_DIR/src/shell/dev.sh"
+[[ -f "$DEVSHELL_DIR/src/shell/dev.sh" ]] && source "$DEVSHELL_DIR/src/shell/dev.sh"
 
 #The above exports are used here
 source $HOME/.zshrc_os.sh

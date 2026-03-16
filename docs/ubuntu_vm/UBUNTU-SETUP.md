@@ -103,7 +103,7 @@ ssh-copy-id username@remote-host
 # Essential packages
 sudo apt install -y git curl wget build-essential stow zsh direnv
 
-# Homebrew
+# Linuxbrew
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
 # GitHub CLI
@@ -189,14 +189,7 @@ git clone git@github.com:sahil-weaver/prompt-pantry.git
 git clone git@github.com:wvrdz/dev-shell.git
 ```
 
-## 8. Install Software Packages
-
-```bash
-cd $DOTFILES_DIR/scripts/macinstall
-./macinstall.sh install
-```
-
-## 9. Install Zap (Zsh Plugin Manager)
+## 8. Install Zap (Zsh Plugin Manager)
 
 ```bash
 ls "${XDG_DATA_HOME:-$HOME/.local/share}/zap" # Check if zap is already installed

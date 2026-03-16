@@ -11,4 +11,3 @@ export BLOG_DIR=`realpath $BOOTSTRAP_DIR/blog2020`
 export MORNING_UPDATES_DIR=`realpath $LIFETRACKER_DIR/cc-morning-updates`
 export CHATS_DIR=`realpath $LIFETRACKER_DIR/cc-chats`
 export CCSCRIPTS_DIR=`realpath $LIFETRACKER_DIR/scripts/cc`
-. "$HOME/.cargo/env"

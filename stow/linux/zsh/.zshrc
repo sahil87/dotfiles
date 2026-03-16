@@ -25,10 +25,10 @@ plug "romkatv/powerlevel10k"
 
 # Dev Shell
 export DEVSHELL_DIR="/home/parallels/code/bootstrap/dev-shell"
-source "$DEVSHELL_DIR/src/shell/dev.sh"
+[[ -f "$DEVSHELL_DIR/src/shell/dev.sh" ]] && source "$DEVSHELL_DIR/src/shell/dev.sh"
 # Prompt Pantry
 export PP_DIR="/home/parallels/code/bootstrap/prompt-pantry"
-source "$PP_DIR/shell/rc-init.sh"
+[[ -f "$PP_DIR/shell/rc-init.sh" ]] && source "$PP_DIR/shell/rc-init.sh"
 
 #The above exports are used here
 source $HOME/.zshrc_os.sh
@@ -49,18 +49,21 @@ fi
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-
 # opencode
-export PATH=/home/parallels/.opencode/bin:$PATH
-
-# bun completions
-[ -s "/home/parallels/.bun/_bun" ] && source "/home/parallels/.bun/_bun"
+[[ -d "$HOME/.opencode/bin" ]] && export PATH="$HOME/.opencode/bin:$PATH"
 
 # bun
-export BUN_INSTALL="$HOME/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"
+if [[ -s "$HOME/.bun/_bun" ]]; then
+  source "$HOME/.bun/_bun"
+  export BUN_INSTALL="$HOME/.bun"
+  export PATH="$BUN_INSTALL/bin:$PATH"
+fi
 
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv zsh)"
+# rust
+[[ -f "$HOME/.cargo/env" ]] && . "$HOME/.cargo/env"
+
+# linuxbrew
+[[ -x /home/linuxbrew/.linuxbrew/bin/brew ]] && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv zsh)"
 
 # We want this hook as late as possible so that any preivous .envrc files aren't picked up. 
 #export DIRENV_LOG_FORMAT=""
