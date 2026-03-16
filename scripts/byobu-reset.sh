@@ -29,9 +29,5 @@ else
     echo -e "    ${RED}gsed not found — install with: brew install gnu-sed${NC}"
 fi
 
-echo -e "${YELLOW}==> Re-enabling byobu${NC}"
-byobu-enable
-echo -e "    ${GREEN}byobu-enable done${NC}"
-
 echo
-echo -e "${GREEN}Reset complete. Start a fresh session with: byobu${NC}"
+echo -e "${GREEN}Reset complete. Run 'byobu-enable' if needed, then start a fresh session with: byobu${NC}"
