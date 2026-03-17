@@ -24,10 +24,10 @@ plug "romkatv/powerlevel10k"
 # plug "zap-zsh/zap-prompt"
 
 # Dev Shell
-export DEVSHELL_DIR="/home/parallels/code/bootstrap/dev-shell"
+export DEVSHELL_DIR="$HOME/code/bootstrap/dev-shell"
 [[ -f "$DEVSHELL_DIR/src/shell/dev.sh" ]] && source "$DEVSHELL_DIR/src/shell/dev.sh"
 # Prompt Pantry
-export PP_DIR="/home/parallels/code/bootstrap/prompt-pantry"
+export PP_DIR="$HOME/code/bootstrap/prompt-pantry"
 [[ -f "$PP_DIR/shell/rc-init.sh" ]] && source "$PP_DIR/shell/rc-init.sh"
 
 #The above exports are used here
