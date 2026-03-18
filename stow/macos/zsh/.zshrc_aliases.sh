@@ -61,9 +61,6 @@ alias kc='kubectl'
 alias mux='tmuxinator'
 alias gpg2='gpg'
 
-#Claude
-alias clauded='claude --dangerously-skip-permissions'
-
 # Save a checkpoint (snapshot current state, keep working)
 save() {
   git add -A
