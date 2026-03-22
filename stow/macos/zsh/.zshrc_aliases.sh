@@ -38,6 +38,7 @@ alias gaa='git add --all'
 alias gr="git remote"
 alias gcm='git commit -m'
 alias gco='git checkout'
+alias gfo='git fetch origin'
 alias gb='git branch'
 alias gst='git status'
 alias gcam='git commit -am'
