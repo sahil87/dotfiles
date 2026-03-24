@@ -140,8 +140,8 @@ sudo usermod -aG docker $USER
 # Claude Code CLI
 npm install -g @anthropic-ai/claude-code
 
-# yazi
-brew install yazi
+# Utilities
+brew install fzf yazi
 ```
 
 ## 3. Clone dotfiles
