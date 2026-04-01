@@ -30,6 +30,9 @@ export DEVSHELL_DIR="$HOME/code/bootstrap/dev-shell"
 export PP_DIR="$HOME/code/bootstrap/prompt-pantry"
 [[ -f "$PP_DIR/shell/rc-init.sh" ]] && source "$PP_DIR/shell/rc-init.sh"
 
+# Claude Code
+export CLAUDE_CODE_NO_FLICKER=1
+
 #The above exports are used here
 source $HOME/.zshrc_os.sh
 source $HOME/.zshrc_aliases.sh
