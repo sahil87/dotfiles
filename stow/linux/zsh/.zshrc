@@ -75,3 +75,5 @@ eval "$(direnv hook zsh)"   # for zsh
 # Must be at the end
 plug "zsh-users/zsh-syntax-highlighting"
 
+#wt Shell wrapper
+eval "$(wt shell-setup)"

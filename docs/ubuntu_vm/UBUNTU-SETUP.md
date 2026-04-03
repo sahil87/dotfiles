@@ -140,6 +140,12 @@ sudo usermod -aG docker $USER
 # Claude Code CLI
 npm install -g @anthropic-ai/claude-code
 
+# OpenAI Codex CLI
+npm install -g @openai/codex
+
+# GitHub Copilot CLI
+brew install copilot-cli
+
 # Utilities
 brew install fzf yazi
 ```
