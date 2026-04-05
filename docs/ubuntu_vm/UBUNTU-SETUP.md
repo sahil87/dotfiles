@@ -193,12 +193,10 @@ ssh -T git@github.com-work     # Work GitHub
 
 ## 7. Clone additional repositories
 
+Edit `scripts/repos.yaml` to add/remove repos, then:
+
 ```bash
-cd ~/code/bootstrap
-git clone git@github.com:sahil87/lifetracker.git
-git clone git@github.com:sahil87/blog2020.git
-git clone git@github.com:sahil-weaver/prompt-pantry.git
-git clone git@github.com:wvrdz/dev-shell.git
+~/code/bootstrap/dotfiles/scripts/clone-repos.sh
 ```
 
 ## 8. Install Zap (Zsh Plugin Manager)
