@@ -3,8 +3,6 @@
 
 ~/code/bootstrap:
   - git@github.com:sahil87/lifetracker.git
-  - git@github.com:sahil-weaver/prompt-pantry.git
-  - git@github.com:wvrdz/dev-shell.git
 
 ~/code/sahil87:
   - git@github.com:sahil87/outbox.git
@@ -12,3 +10,7 @@
   - git@github.com:sahil87/fab-kit.git
   - git@github.com:sahil87/run-kit.git
   - git@github.com:sahil87/tu.git
+
+~/code/wvrdz:
+  - git@github.com:sahil-weaver/prompt-pantry.git
+  - git@github.com:wvrdz/dev-shell.git

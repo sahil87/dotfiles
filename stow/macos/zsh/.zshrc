@@ -23,13 +23,11 @@ plug "zap-zsh/supercharge"
 plug "romkatv/powerlevel10k"
 # plug "zap-zsh/zap-prompt"
 
-# Prompt Pantry
-export PP_DIR="/Users/sahil/code/bootstrap/prompt-pantry"
-[[ -f "$PP_DIR/shell/rc-init.sh" ]] && source "$PP_DIR/shell/rc-init.sh"
+# Prompt Pantry (PP_DIR set in .zshenv)
+[[ -n "$PP_DIR" && -f "$PP_DIR/shell/rc-init.sh" ]] && source "$PP_DIR/shell/rc-init.sh"
 
-# Dev Shell
-export DEVSHELL_DIR="/Users/sahil/code/bootstrap/dev-shell"
-[[ -f "$DEVSHELL_DIR/src/shell/dev.sh" ]] && source "$DEVSHELL_DIR/src/shell/dev.sh"
+# Dev Shell (DEVSHELL_DIR set in .zshenv)
+[[ -n "$DEVSHELL_DIR" && -f "$DEVSHELL_DIR/src/shell/dev.sh" ]] && source "$DEVSHELL_DIR/src/shell/dev.sh"
 
 # Claude Code
 export CLAUDE_CODE_NO_FLICKER=1
