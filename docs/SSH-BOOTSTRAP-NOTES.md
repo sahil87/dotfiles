@@ -10,8 +10,8 @@ New machines need SSH keys but can't pull them without authentication — a catc
 
 ```bash
 ./scripts/setup-tailscale.sh       # Install and connect to tailnet
-./scripts/clone-sshkeys-all.sh     # Pull all keys (sahil-weaver, sahil87, ss)
 ./scripts/clone-sshkeys-edge.sh    # Pull edge keys only (sahil-weaver, sahil87)
+./scripts/clone-sshkeys-all.sh     # Pull all keys (sahil-weaver, sahil87, ss)
 ./scripts/authorize-ss-key.sh      # Add ss public key to local authorized_keys
 ./scripts/clone-sshconfig-init.sh  # Copy starter ~/.ssh/config for the cloned keys
 ```
