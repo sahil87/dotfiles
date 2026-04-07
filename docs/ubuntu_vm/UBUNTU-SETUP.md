@@ -133,12 +133,14 @@ nvm install 24
 nvm alias default 24
 node --version              # Verify
 
-# Docker
-sudo apt install docker.io docker-compose -y
+# Docker (official repo)
+sudo apt remove -y docker docker-engine docker.io containerd runc
+sudo apt autoremove -y
+curl -fsSL https://get.docker.com | sh
 sudo usermod -aG docker $USER
 
 # Claude Code CLI
-npm install -g @anthropic-ai/claude-code
+brew install claude-code
 
 # OpenAI Codex CLI
 npm install -g @openai/codex
@@ -172,7 +174,16 @@ The script will:
 - Prompt you to authenticate Tailscale
 - Pull keys from remote server
 
-## 5. Install dotfiles with stow
+## 5. Install Zap (Zsh Plugin Manager)
+
+> **Must run before stow** — Zap overwrites `~/.zshrc`, so install it first, then let stow symlink your real config on top.
+
+```bash
+ls "${XDG_DATA_HOME:-$HOME/.local/share}/zap" # Check if zap is already installed
+zsh <(curl -s https://raw.githubusercontent.com/zap-zsh/zap/master/install.zsh)
+```
+
+## 6. Install dotfiles with stow
 
 ```bash
 cd stow/linux
@@ -183,7 +194,7 @@ chsh -s $(which zsh)
 ```
 Log out and back in for the change to take effect.
 
-## 6. Verify SSH setup
+## 7. Verify SSH setup
 
 ```bash
 #Verify:
@@ -191,7 +202,7 @@ ssh -T git@github.com          # Personal GitHub
 ssh -T git@github.com-work     # Work GitHub
 ```
 
-## 7. Install Homebrew
+## 8. Install Homebrew
 
 ```bash
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
@@ -203,7 +214,7 @@ Follow the post-install instructions to add Homebrew to your PATH, then verify:
 brew --version
 ```
 
-## 8. Clone additional repositories
+## 9. Clone additional repositories
 
 Edit `scripts/repos.yaml` to add/remove repos, then:
 
@@ -212,17 +223,11 @@ sudo snap install yq
 ~/code/bootstrap/dotfiles/scripts/clone-repos.sh
 ```
 
-## 9. Install Zap (Zsh Plugin Manager)
-
-```bash
-ls "${XDG_DATA_HOME:-$HOME/.local/share}/zap" # Check if zap is already installed
-zsh <(curl -s https://raw.githubusercontent.com/zap-zsh/zap/master/install.zsh)
-```
-
-## 10 Softwares
+## 10. Softwares
 
 ```bash
 brew install tmux #The default version is sometimes outdated
+sudo apt update && sudo apt install build-essential
 brew tap sahil87/tap
 brew install tu rk fab-kit
 ```
