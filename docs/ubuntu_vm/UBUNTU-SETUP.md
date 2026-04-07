@@ -191,17 +191,38 @@ ssh -T git@github.com          # Personal GitHub
 ssh -T git@github.com-work     # Work GitHub
 ```
 
-## 7. Clone additional repositories
+## 7. Install Homebrew
+
+```bash
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+```
+
+Follow the post-install instructions to add Homebrew to your PATH, then verify:
+
+```bash
+brew --version
+```
+
+## 8. Clone additional repositories
 
 Edit `scripts/repos.yaml` to add/remove repos, then:
 
 ```bash
+sudo snap install yq
 ~/code/bootstrap/dotfiles/scripts/clone-repos.sh
 ```
 
-## 8. Install Zap (Zsh Plugin Manager)
+## 9. Install Zap (Zsh Plugin Manager)
 
 ```bash
 ls "${XDG_DATA_HOME:-$HOME/.local/share}/zap" # Check if zap is already installed
 zsh <(curl -s https://raw.githubusercontent.com/zap-zsh/zap/master/install.zsh)
+```
+
+## 10 Softwares
+
+```bash
+brew install tmux #The default version is sometimes outdated
+brew tap sahil87/tap
+brew install tu rk fab-kit
 ```

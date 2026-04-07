@@ -22,7 +22,7 @@ yq -r 'keys[]' "$CONFIG" | while read -r dir; do
   mkdir -p "$expanded_dir"
 
   # Iterate over repos under this directory
-  yq -r ".\"$dir\"[] // empty" "$CONFIG" | while read -r url; do
+  yq -r ".\"$dir\"[]" "$CONFIG" | while read -r url; do
     [[ -z "$url" ]] && continue
     repo_name=$(basename "$url" .git)
     target="$expanded_dir/$repo_name"
