@@ -96,21 +96,28 @@ alias fix='stty sane; printf "\e[?1000l\e[?1002l\e[?1003l\e[?1006l"; clear'
 tabname() { printf '\033]2;%s\007' "$*"; }
 alias tn='tabname'
 
-# Worktree + Claude {{{
-# Spin up a worktree and start a claude session
+# Worktree + Claude (tmux) {{{
+# Spin up a worktree and start a claude session in a new tmux window
 # Usage: riff [fab-command] [wt-args...]
 riff() {
   local cmd="${1:-/fab-discuss}"; shift 2>/dev/null
-  wt create --non-interactive --worktree-open default "$@" && clauded "$cmd"
+  local output wt_path
+  output=$(wt create --non-interactive --worktree-open skip "$@" 2>&1)
+  wt_path=$(echo "$output" | grep '^Path:' | cut -d' ' -f2)
+  [[ -n "$wt_path" && -d "$wt_path" ]] || { echo "$output"; return 1; }
+  tmux new-window -c "$wt_path" "clauded '$cmd'"
 }
 # Like riff, but with a tmux side pane that runs a shell command first
 # Usage: riffs [fab-command] [shell-command] [wt-args...]
 riffs() {
   local cmd="${1:-/fab-discuss}"; shift 2>/dev/null
   local setup="${1:-just setup}"; shift 2>/dev/null
-  wt create --non-interactive --worktree-open default "$@" || return 1
-  tmux split-window -h -c "$(pwd)" "$setup; exec zsh"
-  clauded "$cmd"
+  local output wt_path
+  output=$(wt create --non-interactive --worktree-open skip "$@" 2>&1)
+  wt_path=$(echo "$output" | grep '^Path:' | cut -d' ' -f2)
+  [[ -n "$wt_path" && -d "$wt_path" ]] || { echo "$output"; return 1; }
+  tmux new-window -c "$wt_path" "clauded '$cmd'"
+  tmux split-window -h -c "$wt_path" "$setup; exec zsh"
 }
 # }}}
 
