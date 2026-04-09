@@ -96,6 +96,11 @@ alias fix='stty sane; printf "\e[?1000l\e[?1002l\e[?1003l\e[?1006l"; clear'
 tabname() { printf '\033]2;%s\007' "$*"; }
 alias tn='tabname'
 
+# Worktree + Claude {{{
+# Spin up a worktree and start a claude discussion
+riff() { wt create --non-interactive --worktree-open default "$@" && clauded "/fab-discuss" }
+# }}}
+
 # AI Agent Usage Tracking {{{
 # Claude Code
 alias ccu='npx ccusage@latest'

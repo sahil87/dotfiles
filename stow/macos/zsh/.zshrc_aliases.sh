@@ -118,6 +118,11 @@ _tabname_hook_ghostty() {
 }
 precmd_functions+=(_tabname_hook_ghostty)
 
+# Worktree + Claude {{{
+# Spin up a worktree and start a claude discussion
+riff() { wt create --non-interactive --worktree-open default "$@" && clauded "/fab-discuss" }
+# }}}
+
 # AI Agent Usage Tracking {{{
 # Claude Code
 alias ccu='npx ccusage@latest'
