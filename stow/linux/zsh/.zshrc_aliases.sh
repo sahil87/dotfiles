@@ -97,8 +97,21 @@ tabname() { printf '\033]2;%s\007' "$*"; }
 alias tn='tabname'
 
 # Worktree + Claude {{{
-# Spin up a worktree and start a claude discussion
-riff() { wt create --non-interactive --worktree-open default "$@" && clauded "/fab-discuss" }
+# Spin up a worktree and start a claude session
+# Usage: riff [fab-command] [wt-args...]
+riff() {
+  local cmd="${1:-/fab-discuss}"; shift 2>/dev/null
+  wt create --non-interactive --worktree-open default "$@" && clauded "$cmd"
+}
+# Like riff, but with a tmux side pane that runs a shell command first
+# Usage: riffs [fab-command] [shell-command] [wt-args...]
+riffs() {
+  local cmd="${1:-/fab-discuss}"; shift 2>/dev/null
+  local setup="${1:-just setup}"; shift 2>/dev/null
+  wt create --non-interactive --worktree-open default "$@" || return 1
+  tmux split-window -h -c "$(pwd)" "$setup; exec zsh"
+  clauded "$cmd"
+}
 # }}}
 
 # AI Agent Usage Tracking {{{
