@@ -70,6 +70,11 @@ fi
 #export DIRENV_LOG_FORMAT=""
 eval "$(direnv hook zsh)"   # for zsh
 
+# nvm
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+
 # Must be at the end
 plug "zsh-users/zsh-syntax-highlighting"
 

@@ -13,8 +13,8 @@ export LIFETRACKER_DIR="$BOOTSTRAP_DIR/lifetracker"
 _dir_export BLOG_DIR    "$HOME/code/sahil87/blog2020"
 _dir_export OUTBOX_DIR  "$HOME/code/sahil87/outbox"
 
-# ~/code/wvrdz (optional)
-_dir_export PP_DIR      "$HOME/code/wvrdz/prompt-pantry"
+# ~/code/sahil-weaver (optional)
+_dir_export PP_DIR      "$HOME/code/sahil-weaver/prompt-pantry"
 _dir_export DEVSHELL_DIR "$HOME/code/wvrdz/dev-shell"
 
 # Lifetracker subdirs
