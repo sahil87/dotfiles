@@ -57,7 +57,8 @@
   whitespace = nowarn
 
 [rerere]
-  enabled = true
+	enabled = true
+	autoUpdate = true
 
 [rebase]
   autosquash = true
