@@ -46,6 +46,7 @@ alias gfo='git fetch origin'
 alias gb='git branch'
 alias gst='git status'
 alias gcam='git commit -am'
+alias gce='git commit --allow-empty -m'
 gaap() { git add --all && git commit -m "${1:?Usage: gaap \"commit message\"}" && git push }
 
 alias gk='gitk --all&'
