@@ -10,6 +10,7 @@
   - git@github.com:sahil87/fab-kit.git
   - git@github.com:sahil87/run-kit.git
   - git@github.com:sahil87/tu.git
+  - git@github.com:sahil87/homebrew-tap.git
 
 ~/code/wvrdz:
   - git@github.com:sahil-weaver/prompt-pantry.git
