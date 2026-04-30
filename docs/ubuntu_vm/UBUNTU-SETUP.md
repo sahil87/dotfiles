@@ -220,7 +220,7 @@ Edit `repos.yaml` to add/remove repos, then:
 
 ```bash
 sudo snap install yq
-~/code/bootstrap/dotfiles/scripts/clone-repos.sh
+~/code/bootstrap/dotfiles/bin/clone-repos.sh
 ```
 
 ## 10. Softwares

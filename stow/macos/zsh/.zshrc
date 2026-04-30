@@ -55,8 +55,12 @@ fi
 #export DIRENV_LOG_FORMAT=""
 eval "$(direnv hook zsh)"   # for zsh
 
-# Must be at the end
-plug "zsh-users/zsh-syntax-highlighting"
 
 #wt Shell wrapper
 eval "$(wt shell-setup)"
+
+#repo Shell wrapper
+eval "$(repo init zsh)"
+
+# Must be at the end
+plug "zsh-users/zsh-syntax-highlighting"

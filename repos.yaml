@@ -2,6 +2,7 @@
 # Each key is a directory (~ is expanded). Values are git clone URLs.
 
 ~/code/bootstrap:
+  - git@github.com:sahil87/dotfiles.git
   - git@github.com:sahil87/lifetracker.git
 
 ~/code/sahil87:
@@ -13,6 +14,10 @@
   - git@github.com:sahil87/tu.git
   - git@github.com:sahil87/homebrew-tap.git
 
-~/code/wvrdz:
+~/code/sahil-weaver:
   - git@github.com:sahil-weaver/prompt-pantry.git
+
+~/code/wvrdz:
   - git@github.com:wvrdz/dev-shell.git
+  - git@github.com:wvrdz/loom.git
+  - git@github.com:wvrdz/infra-tf.git

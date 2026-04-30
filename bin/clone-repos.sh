@@ -1,10 +1,9 @@
 #!/usr/bin/env bash
 # Bulk-clone repos listed in repos.yaml
-# Usage: ./clone-repos.sh [path/to/repos.yaml]
+# Usage: clone-repos.sh [path/to/repos.yaml]
 set -euo pipefail
 
-SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
-CONFIG="${1:-$SCRIPT_DIR/../repos.yaml}"
+CONFIG="${1:-${DOTFILES_DIR:-$HOME/code/bootstrap/dotfiles}/repos.yaml}"
 
 if ! command -v yq &>/dev/null; then
   echo "Error: yq is required (https://github.com/mikefarah/yq)" >&2

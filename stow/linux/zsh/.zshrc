@@ -75,8 +75,11 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 
-# Must be at the end
-plug "zsh-users/zsh-syntax-highlighting"
-
 #wt Shell wrapper
 eval "$(wt shell-setup)"
+
+#repo Shell wrapper
+eval "$(repo init zsh)"
+
+# Must be at the end
+plug "zsh-users/zsh-syntax-highlighting"
