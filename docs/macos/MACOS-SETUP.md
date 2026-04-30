@@ -53,7 +53,7 @@ ssh -T git@github.com-work     # Work GitHub
 
 ## 7. Clone additional repositories
 
-Edit `scripts/repos.yaml` to add/remove repos, then:
+Edit `repos.yaml` to add/remove repos, then:
 
 ```bash
 brew install yq

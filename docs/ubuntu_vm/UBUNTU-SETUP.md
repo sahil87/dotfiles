@@ -216,7 +216,7 @@ brew --version
 
 ## 9. Clone additional repositories
 
-Edit `scripts/repos.yaml` to add/remove repos, then:
+Edit `repos.yaml` to add/remove repos, then:
 
 ```bash
 sudo snap install yq

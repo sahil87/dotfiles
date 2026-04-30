@@ -6,6 +6,7 @@
 
 ~/code/sahil87:
   - git@github.com:sahil87/outbox.git
+  - git@github.com:sahil87/planner.git
   - git@github.com:sahil87/blog2020.git
   - git@github.com:sahil87/fab-kit.git
   - git@github.com:sahil87/run-kit.git

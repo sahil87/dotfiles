@@ -45,7 +45,9 @@
 # Keybindings
 # keybind = global:cmd+escape=toggle_quick_terminal
 # keybind = global:cmd+escape=toggle_visibility
-keybind = global:ctrl+escape=toggle_visibility
+# keybind = global:ctrl+escape=toggle_visibility
+# keybind = global:cmd+grave_accent=toggle_quick_terminal
+keybind = global:alt+grave_accent=toggle_quick_terminal
 
 # tell Ghostty to use a standard TERM value that the remote systems know about.
 term = xterm-256color

@@ -4,7 +4,7 @@
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
-CONFIG="${1:-$SCRIPT_DIR/repos.yaml}"
+CONFIG="${1:-$SCRIPT_DIR/../repos.yaml}"
 
 if ! command -v yq &>/dev/null; then
   echo "Error: yq is required (https://github.com/mikefarah/yq)" >&2
