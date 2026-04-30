@@ -13,11 +13,13 @@ Usage:
   repo code <name>       open VSCode at the repo
   repo open <name>       open the repo in the OS file manager (Finder on macOS)
   repo cd <name>         cd into the repo (shell function — needs `eval "$(repo init zsh)"`)
+  repo clone <name>      git clone the repo if it isn't already on disk
   repo ls                list all repos
   repo init zsh          emit zsh shell integration (use: eval "$(repo init zsh)")
   repo                   fzf picker, print selection
   repo code              fzf picker, then open VSCode
   repo open              fzf picker, then open in OS file manager
+  repo clone             fzf picker, then clone if missing
   repo -h | --help       show this help
 
 Notes:
@@ -80,13 +82,13 @@ fi
 _list() {
   yq -r '
     to_entries | .[] | .key as $dir
-    | .value[]
-    | (split("/") | .[-1] | sub("\.git$"; "")) as $name
-    | $name + "\t" + $dir + "/" + $name
+    | .value[] as $url
+    | ($url | split("/") | .[-1] | sub("\.git$"; "")) as $name
+    | $name + "\t" + $dir + "/" + $name + "\t" + $url
   ' "$CONFIG" | sed "s|\t~|\t$HOME|"
 }
 
-_resolve() {
+_resolve_row() {
   local query="${1-}" entries matches count
   entries="$(_list)"
   if [[ -n "$query" ]]; then
@@ -94,14 +96,15 @@ _resolve() {
       | awk -F'\t' -v q="$query" 'BEGIN{IGNORECASE=1} index(tolower($1), tolower(q))')"
     count="$(printf '%s' "$matches" | grep -c . || true)"
     if [[ "$count" == "1" ]]; then
-      printf '%s\n' "$matches" | cut -f2
+      printf '%s\n' "$matches"
       return
     fi
   fi
   printf '%s\n' "$entries" \
-    | fzf --query "$query" --select-1 --height 40% --reverse --with-nth 1 --delimiter '\t' \
-    | cut -f2
+    | fzf --query "$query" --select-1 --height 40% --reverse --with-nth 1 --delimiter '\t'
 }
+
+_resolve() { _resolve_row "${1-}" | cut -f2; }
 
 _open_code() {
   local p
@@ -120,11 +123,31 @@ _open_in_os() {
   esac
 }
 
+_clone() {
+  local row p url
+  row="$(_resolve_row "${1-}")"
+  [[ -z "$row" ]] && return
+  p="$(printf '%s' "$row" | cut -f2)"
+  url="$(printf '%s' "$row" | cut -f3)"
+  if [[ -d "$p/.git" ]]; then
+    echo "skip: already cloned at $p" >&2
+    return 0
+  fi
+  if [[ -e "$p" ]]; then
+    echo "repo clone: $p exists but is not a git repo" >&2
+    return 1
+  fi
+  mkdir -p "$(dirname "$p")"
+  echo "clone: $url → $p" >&2
+  git clone "$url" "$p"
+}
+
 case "${1-}" in
-  ls)        _list | column -t -s $'\t' ;;
+  ls)        _list | cut -f1,2 | column -t -s $'\t' ;;
   path)      _resolve "${2-}" ;;
   code)      _open_code "${2-}" ;;
   open)      _open_in_os "${2-}" ;;
+  clone)     _clone "${2-}" ;;
   cd)        echo "repo: 'cd' is shell-only. Add 'eval \"\$(repo init zsh)\"' to your zshrc, or use: cd \"\$(repo path \"\${2:-}\")\"" >&2; exit 2 ;;
   "")        _resolve "" ;;
   *)         _resolve "$1" ;;
