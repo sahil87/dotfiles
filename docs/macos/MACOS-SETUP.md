@@ -57,7 +57,7 @@ Edit `repos.yaml` to add/remove repos, then:
 
 ```bash
 brew install yq
-~/code/bootstrap/dotfiles/bin/clone-repos.sh
+~/code/bootstrap/dotfiles/bin/repo clone --all
 ```
 
 ## 8. Install Software Packages

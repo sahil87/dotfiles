@@ -14,6 +14,7 @@ Usage:
   repo open <name>       open the repo in the OS file manager (Finder on macOS)
   repo cd <name>         cd into the repo (shell function — needs `eval "$(repo init zsh)"`)
   repo clone <name>      git clone the repo if it isn't already on disk
+  repo clone --all       clone every repo from repos.yaml that isn't already on disk
   repo ls                list all repos
   repo init zsh          emit zsh shell integration (use: eval "$(repo init zsh)")
   repo                   fzf picker, print selection
@@ -142,12 +143,39 @@ _clone() {
   git clone "$url" "$p"
 }
 
+_clone_all() {
+  local cloned=0 skipped=0 failed=0 name p url
+  while IFS=$'\t' read -r name p url; do
+    [[ -z "$name" ]] && continue
+    if [[ -d "$p/.git" ]]; then
+      echo "skip: $p (already cloned)"
+      skipped=$((skipped + 1))
+      continue
+    fi
+    if [[ -e "$p" ]]; then
+      echo "fail: $p exists but is not a git repo" >&2
+      failed=$((failed + 1))
+      continue
+    fi
+    mkdir -p "$(dirname "$p")"
+    echo "clone: $url → $p"
+    if git clone "$url" "$p"; then
+      cloned=$((cloned + 1))
+    else
+      failed=$((failed + 1))
+    fi
+  done < <(_list)
+  echo
+  echo "summary: cloned=$cloned skipped=$skipped failed=$failed"
+  (( failed == 0 ))
+}
+
 case "${1-}" in
   ls)        _list | cut -f1,2 | column -t -s $'\t' ;;
   path)      _resolve "${2-}" ;;
   code)      _open_code "${2-}" ;;
   open)      _open_in_os "${2-}" ;;
-  clone)     _clone "${2-}" ;;
+  clone)     if [[ "${2-}" == "--all" ]]; then _clone_all; else _clone "${2-}"; fi ;;
   cd)        echo "repo: 'cd' is shell-only. Add 'eval \"\$(repo init zsh)\"' to your zshrc, or use: cd \"\$(repo path \"\${2:-}\")\"" >&2; exit 2 ;;
   "")        _resolve "" ;;
   *)         _resolve "$1" ;;
