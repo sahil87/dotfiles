@@ -17,7 +17,9 @@ _dir_export OUTBOX_DIR  "$HOME/code/sahil87/outbox"
 _dir_export PP_DIR      "$HOME/code/sahil-weaver/prompt-pantry"
 _dir_export DEVSHELL_DIR "$HOME/code/wvrdz/dev-shell"
 
+export REPOS_YAML="$DOTFILES_DIR/repos.yaml"
+
 # Lifetracker subdirs
-export MORNING_UPDATES_DIR="$LIFETRACKER_DIR/cc-morning-updates"
-export CHATS_DIR="$LIFETRACKER_DIR/cc-chats"
-export CCSCRIPTS_DIR="$LIFETRACKER_DIR/scripts/cc"
+# export MORNING_UPDATES_DIR="$LIFETRACKER_DIR/cc-morning-updates"
+# export CHATS_DIR="$LIFETRACKER_DIR/cc-chats"
+# export CCSCRIPTS_DIR="$LIFETRACKER_DIR/scripts/cc"
