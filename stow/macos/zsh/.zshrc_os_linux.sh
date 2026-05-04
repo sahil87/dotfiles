@@ -6,3 +6,6 @@
 NVM_SOURCE="$HOME/.nvm"
 export PNPM_HOME="$HOME/.local/share/pnpm"
 OS_PATH_EXTRAS=($HOME/.local/bin)
+
+# linuxbrew
+[[ -x /home/linuxbrew/.linuxbrew/bin/brew ]] && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv zsh)"

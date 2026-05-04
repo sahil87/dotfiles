@@ -1,8 +1,0 @@
-# Ignore everything
-*
-
-# Except this file and profile.tmux
-!.gitignore
-!profile.tmux
-!datetime.tmux
-!status

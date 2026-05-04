@@ -1,0 +1,19 @@
+[user]
+  name = Sahil Ahuja
+  email = sahil@weaverapp.ai
+
+
+# Work account - Weaver (sahil-weaver, wvrdz)
+# [includeIf "hasconfig:remote.*.url:git@github.com:sahil-weaver*/**"]
+#  path = ~/.gitconfig-work
+
+# [includeIf "hasconfig:remote.*.url:git@github.com:wvrdz*/**"]
+#   path = ~/.gitconfig-work
+
+[url "git@github.com-work:wvrdz"]
+	insteadOf = git@github.com:wvrdz
+	insteadOf = https://github.com/wvrdz/
+
+[url "git@github.com-work:sahil-weaver"]
+	insteadOf = git@github.com:sahil-weaver
+	insteadOf = https://github.com/sahil-weaver/

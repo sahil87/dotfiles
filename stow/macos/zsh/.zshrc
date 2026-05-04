@@ -40,7 +40,7 @@ source $LIFETRACKER_DIR/secrets/zsh/.zshrc_secrets.sh
 # Load and initialise completion system (optimized for performance)
 autoload -Uz compinit
 # Only rebuild cache once per day
-if [[ -n ${ZDOTDIR}/.zcompdump(#qN.mh+24) ]]; then
+if [[ -n ${ZDOTDIR:-$HOME}/.zcompdump(#qN.mh+24) ]]; then
   compinit
 else
   compinit -C
@@ -51,10 +51,22 @@ fi
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-# We want this hook as late as possible so that any preivous .envrc files aren't picked up. 
+# opencode
+[[ -d "$HOME/.opencode/bin" ]] && export PATH="$HOME/.opencode/bin:$PATH"
+
+# bun
+if [[ -s "$HOME/.bun/_bun" ]]; then
+  source "$HOME/.bun/_bun"
+  export BUN_INSTALL="$HOME/.bun"
+  export PATH="$BUN_INSTALL/bin:$PATH"
+fi
+
+# rust
+[[ -f "$HOME/.cargo/env" ]] && . "$HOME/.cargo/env"
+
+# We want this hook as late as possible so that any preivous .envrc files aren't picked up.
 #export DIRENV_LOG_FORMAT=""
 eval "$(direnv hook zsh)"   # for zsh
-
 
 #wt Shell wrapper
 eval "$(wt shell-setup)"

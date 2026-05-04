@@ -19,33 +19,38 @@ sudo pacman -S stow
 
 ## Structure
 
-Each subdirectory is a "stow package" that mirrors your home directory structure:
+Packages live under `stow/packages/`. Each subdirectory there is a "stow package" that mirrors your home directory structure:
 
 ```
-dotfiles/
-├── git/
-│   └── .gitconfig          → ~/.gitconfig
-├── ssh/
-│   └── .ssh/
-│       └── config          → ~/.ssh/config
-├── claude/
-│   └── .claude/
-│       ├── CLAUDE.md       → ~/.claude/CLAUDE.md
-│       └── ...
+stow/
+├── packages/                ← canonical home for stow packages
+│   ├── git/
+│   │   └── .gitconfig       → ~/.gitconfig
+│   ├── ssh_macos/
+│   │   └── .ssh/
+│   │       └── config       → ~/.ssh/config
+│   ├── zsh/
+│   │   └── ...
+│   └── stowhelper.sh
+├── linux/                   ← legacy, retained for unlinked machines
+├── macos/                   ← legacy, retained for unlinked machines
+└── archive/
 ```
+
+OS-specific packages are suffixed (`ssh_macos`, `ssh_linux`). Stow only the ones for the current host.
 
 ## Usage
 
 ### Install/Link Configurations
 
-From the `dotfiles` directory:
+From `stow/packages/`:
 
 ```bash
 # Link a single program
 stow -t ~ git
 
 # Link multiple programs
-stow -t ~ git ssh claude
+stow -t ~ git ssh_macos zsh
 
 # Link everything (careful!)
 stow -t ~ */
@@ -91,21 +96,21 @@ stow -t ~ -n -v git
 
 ## Available Packages
 
-- **aws** - AWS CLI configuration
-- **byobu** - Terminal multiplexer config
-- **claude** - Claude Code configuration
-- **code-server** - VS Code server settings
-- **ghostty** - Ghostty terminal config
+Shared (both OSes):
 - **git** - Git global configuration
-- **jj** - Jujutsu VCS config
-- **kube** - Kubernetes config (local copy)
-- **npm** - NPM configuration
-- **samba** - SMB client config
-- **ssh** - SSH client configuration
+- **tu** - tu config
+- **zsh** - Zsh config (`.zshrc`, `.zshenv`, aliases, p10k). OS-specific bits live in `.zshrc_os_<os>.sh` and `.zshrc_aliases_<os>.sh` (sourced conditionally).
+
+OS-specific:
+- **ghostty** - Ghostty terminal config (macOS only)
+- **ssh_macos** / **ssh_linux** - SSH client config. Split because the macOS host is a work machine (clients with `ControlMaster`, Tailscale hosts) and Linux hosts are leaf nodes. Stow only one per machine.
+
+## Layout notes
+
+`stow/packages/` is the canonical home for packages. The `linux/` and `macos/` directories still contain duplicates from before the consolidation — they remain so existing symlinks on already-linked machines don't break. Migrate a machine by unstowing from `stow/linux/` or `stow/macos/` and re-stowing from `stow/packages/`. Once no machine depends on a legacy directory, delete it.
 
 ## Notes
 
-- **kube**: The original script linked to a Dropbox path for kubectl config. This local copy exists but you may want to continue using Dropbox for cross-machine sync.
 - **cloudflare-ddns**: Not integrated with stow (was not in original script).
 - **Conflicts**: Stow will refuse to overwrite existing files. Use `--adopt` to pull existing files in, or manually backup and remove them first.
 
