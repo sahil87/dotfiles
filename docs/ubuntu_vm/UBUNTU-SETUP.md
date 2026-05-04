@@ -216,11 +216,11 @@ brew --version
 
 ## 9. Clone additional repositories
 
-Edit `repos.yaml` to add/remove repos, then:
+Edit `~/hop.yaml` (stowed from `stow/packages/hop/hop.yaml`) to add/remove repos, then:
 
 ```bash
 sudo snap install yq
-~/code/bootstrap/dotfiles/bin/repo clone --all
+hop clone --all
 ```
 
 ## 10. Softwares

@@ -72,7 +72,7 @@ eval "$(direnv hook zsh)"   # for zsh
 eval "$(wt shell-setup)"
 
 #repo Shell wrapper
-eval "$(repo init zsh)"
+eval "$(hop shell-init zsh)"
 
 # Must be at the end
 plug "zsh-users/zsh-syntax-highlighting"

@@ -53,11 +53,11 @@ ssh -T git@github.com-work     # Work GitHub
 
 ## 7. Clone additional repositories
 
-Edit `repos.yaml` to add/remove repos, then:
+Edit `~/hop.yaml` (stowed from `stow/packages/hop/hop.yaml`) to add/remove repos, then:
 
 ```bash
 brew install yq
-~/code/bootstrap/dotfiles/bin/repo clone --all
+hop clone --all
 ```
 
 ## 8. Install Software Packages

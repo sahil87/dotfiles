@@ -1,0 +1,45 @@
+# hop config — locator and operations registry.
+# Edit to add repos. Tip: set $HOP_CONFIG to a tracked path (dotfiles, Dropbox)
+# so this config moves with you across machines.
+#
+# Two ways to add a repo:
+#   1. Append a URL to a flat group (default) — convention applies:
+#      path = <config.code_root>/<org-from-url>/<name-from-url>
+#   2. Use a named group with explicit `dir:` to override convention.
+
+config:
+  code_root: ~/code
+
+repos:
+  default:
+    - git@github.com:sahil87/hop.git    # the locator tool itself
+    - git@github.com:sahil87/blog2020.git
+    - git@github.com:sahil87/fab-kit.git
+    - git@github.com:sahil87/homebrew-tap.git
+    - git@github.com:sahil87/idea.git
+    - git@github.com:sahil87/outbox.git
+    - git@github.com:sahil87/planner.git
+    - git@github.com:sahil87/repo.git
+    - git@github.com:sahil87/run-kit.git
+    - git@github.com:sahil87/sahil87.git
+    - git@github.com:sahil87/tu.git
+    - git@github.com:sahil87/wt.git
+    - git@github.com:sahil-weaver/prompt-pantry.git
+    - git@github.com:wvrdz/dev-shell.git
+    - git@github.com:wvrdz/infra-tf.git
+    - git@github.com:wvrdz/kube-all.git
+    - git@github.com:wvrdz/loom.git
+
+  bootstrap:
+    dir: ~/code/bootstrap
+    urls:
+      - git@github.com:sahil87/dotfiles.git
+      - git@github.com:sahil87/lifetracker.git
+
+  # Example: vendor group with explicit dir override.
+  # vendor:
+  #   dir: ~/vendor
+  #   urls:
+  #     - git@github.com:some-vendor/their-tool.git
+# Repositories to clone, grouped by parent directory.
+# Each key is a directory (~ is expanded). Values are git clone URLs.
