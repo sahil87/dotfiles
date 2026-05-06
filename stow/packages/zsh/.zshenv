@@ -20,6 +20,4 @@ _dir_export DEVSHELL_DIR "$HOME/code/wvrdz/dev-shell"
 export HOP_CONFIG="$HOME/hop.yaml"
 
 # Lifetracker subdirs
-# export MORNING_UPDATES_DIR="$LIFETRACKER_DIR/cc-morning-updates"
-# export CHATS_DIR="$LIFETRACKER_DIR/cc-chats"
 # export CCSCRIPTS_DIR="$LIFETRACKER_DIR/scripts/cc"
