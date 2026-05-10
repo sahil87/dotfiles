@@ -69,10 +69,14 @@ fi
 eval "$(direnv hook zsh)"   # for zsh
 
 #wt Shell wrapper
-eval "$(wt shell-setup)"
+# eval "$(wt shell-setup)"
 
 #repo Shell wrapper
-eval "$(hop shell-init zsh)"
+# eval "$(hop shell-init zsh)"
+
+# >>> shll shell-init >>>
+eval "$(shll shell-init zsh)"
+# <<< shll shell-init <<<
 
 # Must be at the end
 plug "zsh-users/zsh-syntax-highlighting"
