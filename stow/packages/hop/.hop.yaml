@@ -12,24 +12,27 @@ config:
 
 repos:
   default:
-    - git@github.com:sahil87/hop.git    # the locator tool itself
-    - git@github.com:sahil87/blog2020.git
-    - git@github.com:sahil87/fab-kit.git
-    - git@github.com:sahil87/homebrew-tap.git
-    - git@github.com:sahil87/idea.git
-    - git@github.com:sahil87/outbox.git
-    - git@github.com:sahil87/planner.git
-    - git@github.com:sahil87/repo.git
-    - git@github.com:sahil87/run-kit.git
-    - git@github.com:sahil87/sahil87.git
-    - git@github.com:sahil87/tu.git
-    - git@github.com:sahil87/wt.git
     - git@github.com:sahil-weaver/prompt-pantry.git
     - git@github.com:wvrdz/dev-shell.git
     - git@github.com:wvrdz/infra-tf.git
     - git@github.com:wvrdz/kube-all.git
     - git@github.com:wvrdz/loom.git
+
+  sahil87:
+    dir: ~/code/sahil87
+    urls:
+    - git@github.com:sahil87/blog2020.git
+    - git@github.com:sahil87/outbox.git
+    - git@github.com:sahil87/planner.git
+    - git@github.com:sahil87/sahil87.git
+    - git@github.com:sahil87/homebrew-tap.git
     - git@github.com:sahil87/shll.git
+    - git@github.com:sahil87/fab-kit.git
+    - git@github.com:sahil87/run-kit.git
+    - git@github.com:sahil87/wt.git
+    - git@github.com:sahil87/idea.git
+    - git@github.com:sahil87/tu.git
+    - git@github.com:sahil87/hop.git    # the locator tool itself
 
   bootstrap:
     dir: ~/code/bootstrap
