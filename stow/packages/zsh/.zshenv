@@ -17,6 +17,6 @@ _dir_export OUTBOX_DIR  "$HOME/code/sahil87/outbox"
 _dir_export PP_DIR      "$HOME/code/sahil-weaver/prompt-pantry"
 _dir_export DEVSHELL_DIR "$HOME/code/wvrdz/dev-shell"
 
-# export HOP_CONFIG="$HOME/.hop.yaml"
+export HOP_CONFIG="$HOME/.hop.yaml"
 # Lifetracker subdirs
 # export CCSCRIPTS_DIR="$LIFETRACKER_DIR/scripts/cc"
