@@ -20,3 +20,5 @@ _dir_export DEVSHELL_DIR "$HOME/code/wvrdz/dev-shell"
 export HOP_CONFIG="$HOME/.hop.yaml"
 # Lifetracker subdirs
 # export CCSCRIPTS_DIR="$LIFETRACKER_DIR/scripts/cc"
+
+export TF_PLUGIN_CACHE_DIR="$HOME/.terraform.d/plugin-cache"
