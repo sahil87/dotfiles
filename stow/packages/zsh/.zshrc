@@ -68,15 +68,10 @@ fi
 #export DIRENV_LOG_FORMAT=""
 eval "$(direnv hook zsh)"   # for zsh
 
-#wt Shell wrapper
-# eval "$(wt shell-setup)"
-
-#repo Shell wrapper
-# eval "$(hop shell-init zsh)"
-
-# >>> shll shell-init >>>
+# >>> shll >>>
+export HOMEBREW_REQUIRE_TAP_TRUST=1
 eval "$(shll shell-init zsh)"
-# <<< shll shell-init <<<
+# <<< shll <<<
 
 # Must be at the end
 plug "zsh-users/zsh-syntax-highlighting"
