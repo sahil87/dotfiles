@@ -12,7 +12,7 @@ config:
 
 repos:
   default:
-    - git@github.com:sahil-weaver/prompt-pantry.git
+    - git@github.com:sahil-noon/prompt-pantry.git
 
   wvrdz:
     dir: ~/code/wvrdz

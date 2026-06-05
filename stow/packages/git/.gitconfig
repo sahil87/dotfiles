@@ -10,8 +10,8 @@
 # Conditional Configurations (work vs personal)
 # =============================================================================
 
-# Work account - Weaver (sahil-weaver, wvrdz)
-[includeIf "hasconfig:remote.*.url:git@github.com:sahil-weaver*/**"]
+# Work account - Weaver (sahil-noon, wvrdz)
+[includeIf "hasconfig:remote.*.url:git@github.com:sahil-noon*/**"]
   path = ~/.gitconfig-work
 
 [includeIf "hasconfig:remote.*.url:git@github.com:wvrdz*/**"]

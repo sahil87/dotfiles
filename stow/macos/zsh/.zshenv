@@ -13,8 +13,8 @@ export LIFETRACKER_DIR="$BOOTSTRAP_DIR/lifetracker"
 _dir_export BLOG_DIR    "$HOME/code/sahil87/blog2020"
 _dir_export OUTBOX_DIR  "$HOME/code/sahil87/outbox"
 
-# ~/code/sahil-weaver (optional)
-_dir_export PP_DIR      "$HOME/code/sahil-weaver/prompt-pantry"
+# ~/code/sahil-noon (optional)
+_dir_export PP_DIR      "$HOME/code/sahil-noon/prompt-pantry"
 _dir_export DEVSHELL_DIR "$HOME/code/wvrdz/dev-shell"
 
 export REPOS_YAML="$DOTFILES_DIR/repos.yaml"

@@ -3,8 +3,8 @@
   email = sahil@weaverapp.ai
 
 
-# Work account - Weaver (sahil-weaver, wvrdz)
-# [includeIf "hasconfig:remote.*.url:git@github.com:sahil-weaver*/**"]
+# Work account - Weaver (sahil-noon, wvrdz)
+# [includeIf "hasconfig:remote.*.url:git@github.com:sahil-noon*/**"]
 #  path = ~/.gitconfig-work
 
 # [includeIf "hasconfig:remote.*.url:git@github.com:wvrdz*/**"]
@@ -14,6 +14,6 @@
 	insteadOf = git@github.com:wvrdz
 	insteadOf = https://github.com/wvrdz/
 
-[url "git@github.com-work:sahil-weaver"]
-	insteadOf = git@github.com:sahil-weaver
-	insteadOf = https://github.com/sahil-weaver/
+[url "git@github.com-work:sahil-noon"]
+	insteadOf = git@github.com:sahil-noon
+	insteadOf = https://github.com/sahil-noon/
