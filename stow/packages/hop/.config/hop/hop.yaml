@@ -9,11 +9,10 @@
 
 config:
   code_root: ~/code
-
 repos:
   default:
     - git@github.com:sahil-noon/prompt-pantry.git
-
+    - git@github.com:sahil87/shll.ai.git
   wvrdz:
     dir: ~/code/wvrdz
     urls:
@@ -21,7 +20,6 @@ repos:
       - git@github.com:wvrdz/infra-tf.git
       - git@github.com:wvrdz/kube-all.git
       - git@github.com:wvrdz/loom.git
-
   sahil87:
     dir: ~/code/sahil87
     urls:
@@ -36,18 +34,17 @@ repos:
       - git@github.com:sahil87/wt.git
       - git@github.com:sahil87/idea.git
       - git@github.com:sahil87/tu.git
-      - git@github.com:sahil87/hop.git    # the locator tool itself
-
+      - git@github.com:sahil87/hop.git # the locator tool itself
   bootstrap:
     dir: ~/code/bootstrap
     urls:
       - git@github.com:sahil87/dotfiles.git
       - git@github.com:sahil87/lifetracker.git
-
   # Example: vendor group with explicit dir override.
   # vendor:
   #   dir: ~/vendor
   #   urls:
   #     - git@github.com:some-vendor/their-tool.git
+
 # Repositories to clone, grouped by parent directory.
 # Each key is a directory (~ is expanded). Values are git clone URLs.
