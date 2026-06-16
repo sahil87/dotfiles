@@ -52,12 +52,6 @@ fi
 
 fpath=("$COMPLETIONS_DIR" $fpath)
 
-# NVM
-export NVM_DIR="$HOME/.nvm"
-[ -s "${NVM_SOURCE:-$NVM_DIR}/nvm.sh" ] && \. "${NVM_SOURCE:-$NVM_DIR}/nvm.sh"
-[ -s "${NVM_SOURCE:-$NVM_DIR}/bash_completion" ] && \. "${NVM_SOURCE:-$NVM_DIR}/bash_completion"
-[ -s "${NVM_SOURCE:-$NVM_DIR}/etc/bash_completion.d/nvm" ] && \. "${NVM_SOURCE:-$NVM_DIR}/etc/bash_completion.d/nvm"
-
 # pnpm
 case ":$PATH:" in
   *":$PNPM_HOME:"*) ;;
@@ -69,3 +63,10 @@ esac
 
 # Path (first match wins) - OS_PATH_EXTRAS set by OS-specific config
 path=($GO_BIN $HOME/.cargo/bin $DOTFILES_DIR/bin $LIFETRACKER_DIR/bin $CODE_DIR/bin $OS_PATH_EXTRAS $path .)
+
+# NVM - sourced AFTER the path rebuild above so nvm's node bin is prepended to
+# the front of PATH and wins over Homebrew's node (in $OS_PATH_EXTRAS).
+export NVM_DIR="$HOME/.nvm"
+[ -s "${NVM_SOURCE:-$NVM_DIR}/nvm.sh" ] && \. "${NVM_SOURCE:-$NVM_DIR}/nvm.sh"
+[ -s "${NVM_SOURCE:-$NVM_DIR}/bash_completion" ] && \. "${NVM_SOURCE:-$NVM_DIR}/bash_completion"
+[ -s "${NVM_SOURCE:-$NVM_DIR}/etc/bash_completion.d/nvm" ] && \. "${NVM_SOURCE:-$NVM_DIR}/etc/bash_completion.d/nvm"
