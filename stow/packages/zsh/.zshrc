@@ -69,7 +69,6 @@ fi
 eval "$(direnv hook zsh)"   # for zsh
 
 # >>> shll >>>
-export HOMEBREW_REQUIRE_TAP_TRUST=1
 eval "$(shll shell-init zsh)"
 # <<< shll <<<
 
