@@ -97,6 +97,7 @@ stow -t ~ -n -v git
 ## Available Packages
 
 Shared (both OSes):
+- **fab-kit** - fab-kit system-level config (`~/.fab-kit/config.yaml`). Only the config file is tracked — `~/.fab-kit/` also holds machine-local state (`versions/`, `local-versions/`) that must stay out of the repo. On a fresh machine run `mkdir -p ~/.fab-kit` before stowing (or stow with `--no-folding`), otherwise stow symlinks the whole directory and fab writes its caches into the repo.
 - **git** - Git global configuration
 - **tu** - tu config
 - **zsh** - Zsh config (`.zshrc`, `.zshenv`, aliases, p10k). OS-specific bits live in `.zshrc_os_<os>.sh` and `.zshrc_aliases_<os>.sh` (sourced conditionally).
