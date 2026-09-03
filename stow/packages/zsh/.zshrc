@@ -80,7 +80,3 @@ eval "$(shll shell-init zsh)"
 
 # Must be at the end
 plug "zsh-users/zsh-syntax-highlighting"
-
-# Prompt Pantry
-export PP_DIR="/Users/sahil/code/sahil-noon/prompt-pantry"
-source "$PP_DIR/shell/rc-init.sh"
