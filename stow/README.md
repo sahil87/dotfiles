@@ -23,113 +23,90 @@ Packages live under `stow/packages/`. Each subdirectory there is a "stow package
 
 ```
 stow/
-├── packages/                ← canonical home for stow packages
+├── packages/
 │   ├── git/
 │   │   └── .gitconfig       → ~/.gitconfig
 │   ├── ssh_macos/
 │   │   └── .ssh/
 │   │       └── config       → ~/.ssh/config
+│   ├── tu/
+│   │   └── .config/tu/
+│   │       └── tu.conf      → ~/.config/tu/tu.conf
 │   ├── zsh/
 │   │   └── ...
 │   └── stowhelper.sh
-├── linux/                   ← legacy, retained for unlinked machines
-├── macos/                   ← legacy, retained for unlinked machines
-└── archive/
+└── archive/                 ← retired configs, not stowed
 ```
 
 OS-specific packages are suffixed (`ssh_macos`, `ssh_linux`). Stow only the ones for the current host.
 
 ## Usage
 
-### Install/Link Configurations
+### Helper script (preferred)
 
 From `stow/packages/`:
 
 ```bash
+./stowhelper.sh git zsh ssh_macos     # Install specific packages
+./stowhelper.sh --backup zsh          # Back up conflicting real files, then install
+./stowhelper.sh --adopt git           # Move existing ~/.gitconfig into the repo, then install
+./stowhelper.sh --uninstall git       # Remove symlinks
+./stowhelper.sh --list                # Show available packages
+```
+
+The helper always passes `--no-folding`, so stow links individual files rather than
+whole directories. Without it, a missing `~/.config/tu` (for example) would become a
+symlink into this repo and anything the tool writes next to its config would land in git.
+
+`--all` installs every package, including both `ssh_*` variants (which conflict) and
+`ghostty` (macOS only). Prefer naming packages explicitly.
+
+### Raw stow
+
+```bash
 # Link a single program
-stow -t ~ git
+stow -t ~ --no-folding git
 
 # Link multiple programs
-stow -t ~ git ssh_macos zsh
+stow -t ~ --no-folding git ssh_macos zsh
 
-# Link everything (careful!)
-stow -t ~ */
-```
-
-**Important:** Always use `-t ~` to target your home directory! Without it, stow will create symlinks in the parent directory (`lifetracker`), not your home.
-
-**⚠️ Important**: If you already have dotfiles in your home directory (e.g., `~/.gitconfig`), stow will refuse to overwrite them. You have two options:
-
-1. **Manual backup and remove**: Back up and delete existing files first
-2. **Use --adopt**: Move existing files into the stow directory (see below)
-
-### Unlink Configurations
-
-```bash
-# Unlink a program
+# Unlink
 stow -t ~ -D git
 
-# Unlink multiple
-stow -t ~ -D git ssh
-```
-
-### Adopt Existing Files (First-Time Setup)
-
-If you have existing dotfiles you want to bring into stow management:
-
-```bash
-# Using stow directly
-stow -t ~ --adopt git       # Moves ~/.gitconfig into dotfiles/git/.gitconfig
-
-# Using the helper script
-./dotinstall.sh --adopt git ssh
-```
-
-**Warning**: `--adopt` will **overwrite** the files in your dotfiles directory with whatever is currently in your home directory. If you've made changes to files in the dotfiles repo that you haven't deployed yet, they'll be lost. Consider backing up first.
-
-### Dry Run (Preview Changes)
-
-```bash
-# See what stow would do without making changes
+# Dry run: see what stow would do without making changes
 stow -t ~ -n -v git
 ```
+
+**Important:** Always use `-t ~` to target your home directory. Without it, stow links
+into the parent directory (`stow/`), not your home.
+
+### Existing files
+
+Stow refuses to overwrite a real file that already exists in your home directory
+(e.g. `~/.gitconfig`). Either:
+
+1. **Back up and remove** it first (`./stowhelper.sh --backup <pkg>` does this with a timestamp suffix), or
+2. **Adopt** it: `stow -t ~ --adopt git` moves the home copy into the package and links it.
+
+**Warning:** `--adopt` overwrites the repo copy with whatever is currently in your home
+directory. Check `git diff` afterwards and revert if the home copy was stale.
 
 ## Available Packages
 
 Shared (both OSes):
-- **fab-kit** - fab-kit system-level config (`~/.fab-kit/config.yaml`). Only the config file is tracked — `~/.fab-kit/` also holds machine-local state (`versions/`, `local-versions/`) that must stay out of the repo. On a fresh machine run `mkdir -p ~/.fab-kit` before stowing (or stow with `--no-folding`), otherwise stow symlinks the whole directory and fab writes its caches into the repo.
-- **git** - Git global configuration
-- **tu** - tu config
+- **git** - Git global config, aliases, and work/personal `includeIf` splits
 - **zsh** - Zsh config (`.zshrc`, `.zshenv`, aliases, p10k). OS-specific bits live in `.zshrc_os_<os>.sh` and `.zshrc_aliases_<os>.sh` (sourced conditionally).
+- **tu** - Token-usage tracker config (`~/.config/tu/tu.conf`)
+- **hop** - Repo locator config (`~/.config/hop/hop.yaml`)
+- **fab-kit** - fab-kit config (`~/.fab-kit/config.yaml`)
 
 OS-specific:
 - **ghostty** - Ghostty terminal config (macOS only)
 - **ssh_macos** / **ssh_linux** - SSH client config. Split because the macOS host is a work machine (clients with `ControlMaster`, Tailscale hosts) and Linux hosts are leaf nodes. Stow only one per machine.
 
-## Layout notes
-
-`stow/packages/` is the canonical home for packages. The `linux/` and `macos/` directories still contain duplicates from before the consolidation — they remain so existing symlinks on already-linked machines don't break. Migrate a machine by unstowing from `stow/linux/` or `stow/macos/` and re-stowing from `stow/packages/`. Once no machine depends on a legacy directory, delete it.
-
 ## Notes
 
-- **cloudflare-ddns**: Not integrated with stow (was not in original script).
-- **Conflicts**: Stow will refuse to overwrite existing files. Use `--adopt` to pull existing files in, or manually backup and remove them first.
-
-## Migration from linkfiles_ubuntu.sh
-
-The old script has been replaced by stow. Key improvements:
-
-1. **Modularity**: Install configs per-program instead of all-at-once
-2. **Safety**: Stow won't overwrite existing files without explicit flags
-3. **Reversibility**: Easy to unlink with `stow -D`
-4. **Standard tool**: No custom bash to maintain
-
-Old workflow:
-```bash
-./linkfiles_ubuntu.sh  # Everything at once
-```
-
-New workflow:
-```bash
-stow git ssh claude    # Just what you need
-```
+- Edits made through the symlinks (e.g. `gh auth setup-git` writing to `~/.gitconfig`) land
+  directly in the repo. Keep them OS-neutral: this is a shared package, so use `gh` from
+  `PATH` rather than an absolute Homebrew/Linuxbrew path.
+- `stow/archive/` holds retired configs (old byobu setup). Nothing in it is a stow package.

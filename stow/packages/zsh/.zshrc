@@ -35,7 +35,7 @@ export CLAUDE_CODE_NO_FLICKER=1
 #The above exports are used here
 source $HOME/.zshrc_os.sh
 source $HOME/.zshrc_aliases.sh
-source $LIFETRACKER_DIR/secrets/zsh/.zshrc_secrets.sh
+[[ -f "$LIFETRACKER_DIR/secrets/zsh/.zshrc_secrets.sh" ]] && source "$LIFETRACKER_DIR/secrets/zsh/.zshrc_secrets.sh"
 
 # Load and initialise completion system (optimized for performance)
 autoload -Uz compinit

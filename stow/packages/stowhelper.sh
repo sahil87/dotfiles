@@ -81,9 +81,9 @@ install_packages() {
 
     if [ "$adopt_mode" = true ]; then
         echo "⚠️  Using --adopt mode: existing files will be moved into stow directory"
-        stow -t ~ --adopt -v "${packages[@]}"
+        stow -t ~ --no-folding --adopt -v "${packages[@]}"
     else
-        stow -t ~ -v "${packages[@]}"
+        stow -t ~ --no-folding -v "${packages[@]}"
     fi
 
     echo
@@ -144,7 +144,7 @@ backup_and_install_packages() {
 
     # Now install the packages
     echo "Installing packages: ${packages[*]}"
-    stow -t ~ -v "${packages[@]}"
+    stow -t ~ --no-folding -v "${packages[@]}"
 
     echo
     echo "✓ Installation complete!"
