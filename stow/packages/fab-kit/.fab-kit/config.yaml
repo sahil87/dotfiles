@@ -12,7 +12,7 @@ providers:
   claude:
     profiles:
       default:
-          model: claude-fable-5
+          model: claude-fable-5-1
           effort: high
 
 # >>> fab reference (kit 2.23.11) >>> --------------------------------------

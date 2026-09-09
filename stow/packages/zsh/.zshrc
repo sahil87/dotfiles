@@ -80,3 +80,6 @@ eval "$(shll shell-init zsh)"
 
 # Must be at the end
 plug "zsh-users/zsh-syntax-highlighting"
+
+# kimi-code
+export PATH="/home/sahil/.kimi-code/bin:$PATH"
