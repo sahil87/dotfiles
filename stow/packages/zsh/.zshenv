@@ -24,3 +24,16 @@ export TF_PLUGIN_CACHE_DIR="$HOME/.terraform.d/plugin-cache"
 # >>> rk tmux guard >>>
 export PATH="$HOME/.local/share/rk/shims:$PATH"
 # <<< rk tmux guard <<<
+# >>> rk gui display >>>
+# .zshenv runs before brew's PATH is set up, so probe the known brew prefixes
+# (Linuxbrew, Apple Silicon Homebrew) before falling back to PATH.
+if [ -n "$TMUX_PANE" ] && [ -z "${DISPLAY-}" ]; then
+  for _rk in /home/linuxbrew/.linuxbrew/bin/run-kit /opt/homebrew/bin/run-kit "$(command -v run-kit 2>/dev/null)"; do
+    if [ -n "$_rk" ] && [ -x "$_rk" ]; then
+      eval "$("$_rk" gui env 2>/dev/null)"
+      break
+    fi
+  done
+  unset _rk
+fi
+# <<< rk gui display <<<
