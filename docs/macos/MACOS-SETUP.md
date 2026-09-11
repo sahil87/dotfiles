@@ -40,9 +40,12 @@ The script will:
 ## 5. Install dotfiles with stow
 
 ```bash
-cd stow/macos
-./stowhelper.sh git ssh zsh # or --all
+cd stow/packages
+./stowhelper.sh git zsh ssh_macos tu hop fab-kit ghostty
 ```
+
+Name packages explicitly rather than using `--all`: it would also stow `ssh_linux`, which
+conflicts with `ssh_macos`. See [stow/README.md](../../stow/README.md) for details.
 
 ## 6. Verify SSH setup
 
@@ -53,7 +56,7 @@ ssh -T git@github.com-work     # Work GitHub
 
 ## 7. Clone additional repositories
 
-Edit `~/hop.yaml` (stowed from `stow/packages/hop/hop.yaml`) to add/remove repos, then:
+Edit `~/.config/hop/hop.yaml` (stowed from `stow/packages/hop/.config/hop/hop.yaml`) to add/remove repos, then:
 
 ```bash
 brew install yq

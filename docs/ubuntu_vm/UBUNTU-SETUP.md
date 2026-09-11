@@ -186,13 +186,16 @@ zsh <(curl -s https://raw.githubusercontent.com/zap-zsh/zap/master/install.zsh)
 ## 6. Install dotfiles with stow
 
 ```bash
-cd stow/linux
-./stowhelper.sh git ssh zsh direnv # or --all
+cd stow/packages
+./stowhelper.sh git zsh ssh_linux tu hop fab-kit
 
 # Switch default shell to zsh:
 chsh -s $(which zsh)
 ```
 Log out and back in for the change to take effect.
+
+Name stow packages explicitly rather than using `--all`: it would also stow `ssh_macos` and
+`ghostty`, which do not belong on Linux. See [stow/README.md](../../stow/README.md) for details.
 
 ## 7. Verify SSH setup
 
@@ -216,7 +219,7 @@ brew --version
 
 ## 9. Clone additional repositories
 
-Edit `~/hop.yaml` (stowed from `stow/packages/hop/hop.yaml`) to add/remove repos, then:
+Edit `~/.config/hop/hop.yaml` (stowed from `stow/packages/hop/.config/hop/hop.yaml`) to add/remove repos, then:
 
 ```bash
 sudo snap install yq
