@@ -80,3 +80,6 @@ eval "$(shll shell-init zsh)"
 
 # Must be at the end
 plug "zsh-users/zsh-syntax-highlighting"
+
+# Added by Devin
+export PATH="/Users/sahil/.codeium/windsurf/bin:$PATH"
