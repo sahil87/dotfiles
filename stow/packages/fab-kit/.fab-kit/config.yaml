@@ -8,13 +8,6 @@ agent:
     operator:
       provider: claude
 
-providers:
-  claude:
-    profiles:
-      default:
-          model: claude-fable-5-1
-          effort: high
-
 # >>> fab reference (kit 2.23.11) >>> --------------------------------------
 # ~/.fab-kit/config.yaml — system-level fab config (all repos on this machine).
 # Resolves ABOVE any project's fab/project/config.yaml (and below environment
