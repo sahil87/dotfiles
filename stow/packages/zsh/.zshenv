@@ -21,6 +21,8 @@ _dir_export DEVSHELL_DIR "$HOME/code/wvrdz/dev-shell"
 # export CCSCRIPTS_DIR="$LIFETRACKER_DIR/scripts/cc"
 
 export TF_PLUGIN_CACHE_DIR="$HOME/.terraform.d/plugin-cache"
+# sops's macOS default is ~/Library/Application Support/sops/age/keys.txt; use one path on every OS
+export SOPS_AGE_KEY_FILE="$HOME/.config/sops/age/keys.txt"
 # >>> rk tmux guard >>>
 export PATH="$HOME/.local/share/rk/shims:$PATH"
 # <<< rk tmux guard <<<

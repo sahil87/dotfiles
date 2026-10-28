@@ -80,6 +80,14 @@
 	process = git-lfs filter-process
 
 # =============================================================================
+# sops: decrypted diffs for files marked `diff=sopsdiffer` in .gitattributes
+# =============================================================================
+
+# Falls back to ciphertext when this machine can't decrypt (edge key, no sops)
+[diff "sopsdiffer"]
+  textconv = "sh -c 'sops decrypt \"$1\" 2>/dev/null || cat \"$1\"' --"
+
+# =============================================================================
 # Aliases (loaded from separate file)
 # =============================================================================
 
