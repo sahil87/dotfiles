@@ -78,8 +78,10 @@ eval "$(direnv hook zsh)"   # for zsh
 eval "$(shll shell-init zsh)"
 # <<< shll <<<
 
-# Must be at the end
-plug "zsh-users/zsh-syntax-highlighting"
-
 # Added by Devin
 export PATH="/Users/sahil/.codeium/windsurf/bin:$PATH"
+# kimi-code
+export PATH="/Users/sahil/.kimi-code/bin:$PATH"
+
+# Must be at the end
+plug "zsh-users/zsh-syntax-highlighting"
