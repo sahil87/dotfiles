@@ -34,6 +34,7 @@ brew "opencode" #brew install anomalyco/tap/opencode for instant updates
 cask "font-cascadia-code-nf"
 cask "font-cascadia-mono-nf"
 cask "font-fira-code-nerd-font"
+cask "font-fira-code" # plain "Fira Code" family name, used by VS Code's editor.fontFamily
 cask "font-monaspice-nerd-font"
 cask "font-jetbrains-mono-nerd-font"
 # === END CATEGORY ===
