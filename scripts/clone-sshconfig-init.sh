@@ -2,7 +2,7 @@
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-CONFIG_SOURCE="$SCRIPT_DIR/../stow/linux/ssh/.ssh/config"
+CONFIG_SOURCE="$SCRIPT_DIR/../stow/packages/ssh_linux/.ssh/config"
 DEST="$HOME/.ssh/config"
 
 RED='\033[0;31m'

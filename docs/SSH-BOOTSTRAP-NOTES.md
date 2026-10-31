@@ -1,30 +1,44 @@
-# SSH Key Bootstrap
+# Machine Access Bootstrap
 
-New machines need SSH keys but can't pull them without authentication — a catch-22. We solve this using **Tailscale SSH** as a bootstrap mechanism:
+This repo is public, so it holds only what a new machine needs to become **reachable from a trusted
+machine** (laptop, Mac mini). Everything after that (age keys, GitHub deploy keys, secrets) is done
+from the private `lifetracker` repo.
 
-1. **Install Tailscale** → authenticate via browser/OAuth (no SSH keys needed)
-2. **Tailscale SSH** → authenticates connections using your Tailscale identity instead of SSH keys
-3. **Pull SSH keys** → now you have them for GitHub, etc.
+Two kinds of machine:
+- **Trusted**: the Macs. Join Tailscale as your user and hold every key.
+- **Edge**: Linux VMs and dev workstations. Join Tailscale as `tag:edge`, can't reach trusted
+  machines, and never get copies of your personal SSH keys.
 
-## Scripts
+## Edge machines
+
+1. **Let the ss key in.** Trusted machines SSH in with the ss key.
+   - Proxmox VMs: cloud-init installs it; nothing to do.
+   - Anything else (e.g. GCP): log in once through the provider's console, then run on the machine:
+     ```bash
+     curl -fsSL https://raw.githubusercontent.com/sahil87/dotfiles/main/scripts/authorize-ss-key.sh | bash
+     ```
+2. **Join Tailscale as edge** (on the machine, from a clone of this repo):
+   ```bash
+   git clone https://github.com/sahil87/dotfiles.git ~/code/bootstrap/dotfiles
+   ~/code/bootstrap/dotfiles/scripts/setup-tailscale.sh --edge
+   ```
+   Open the login URL, sign in as yourself, and approve the device in the admin console. The
+   device joins tagged, not as you.
+3. **From a trusted machine**: run `secrets/provision-edge.sh <host>` in `lifetracker` (age key;
+   add `--deploy-key` for service VMs that `git pull`).
+4. **Dev workstations only, GitHub access**: give the machine its own key, revocable on its own:
+   ```bash
+   ssh-keygen -t ed25519 -f ~/.ssh/id_ed25519_github -C "$(hostname)"
+   gh auth login   # choose SSH, upload ~/.ssh/id_ed25519_github.pub
+   ```
+   The `ssh_linux` stow package uses `~/.ssh/id_ed25519_github` for `github.com`.
+
+## Trusted machines
 
 ```bash
-./scripts/setup-tailscale.sh       # Install and connect to tailnet
-./scripts/clone-sshkeys-edge.sh    # Pull edge keys only (sahil-noon, sahil87)
-./scripts/clone-sshkeys-all.sh     # Pull all keys (sahil-noon, sahil87, ss)
-./scripts/authorize-ss-key.sh      # Add ss public key to local authorized_keys
-./scripts/clone-sshconfig-init.sh  # Copy starter ~/.ssh/config for the cloned keys
+./scripts/setup-tailscale.sh       # Install and join the tailnet as your user
+./scripts/clone-sshkeys-all.sh     # Pull SSH keys (sahil-noon, sahil87, ss) from the Mac mini
+./scripts/clone-sshconfig-init.sh  # Copy a starter ~/.ssh/config (Linux layout)
 ```
 
-- **all** vs **edge**: Use `clone-sshkeys-all.sh` on primary machines that need every key. Use `clone-sshkeys-edge.sh` on edge/secondary machines that only need GitHub keys.
-- **authorize-ss-key**: Fetches `id_ed25519_ss.pub` from the Mac Mini and appends it to `~/.ssh/authorized_keys`, allowing the ss key to SSH into the current machine. The key itself doesn't need to be present locally.
-
-## Prerequisites (on the source machine)
-
-The machine storing your SSH keys (Mac Mini) needs Tailscale SSH enabled:
-
-```bash
-tailscale set --ssh
-```
-
-And your tailnet's [Access Controls](https://login.tailscale.com/admin/acls) need an SSH policy (the default policy already allows this).
+The age keys for sops come from the Mac mini too; see `lifetracker/secrets/README.md`.

@@ -160,19 +160,17 @@ git clone https://github.com/sahil87/dotfiles.git ~/code/bootstrap/dotfiles
 cd ~/code/bootstrap/dotfiles
 ```
 
-## 4. Bootstrap SSH keys via Tailscale
+## 4. Join Tailscale as an edge machine
 
-This pulls your private keys from a remote server over Tailscale.
+Ubuntu VMs are **edge** machines: they join Tailscale as `tag:edge` and don't get your personal SSH keys.
 
 ```bash
-./scripts/setup-tailscale.sh
-./scripts/pull-ssh-keys.sh
+./scripts/authorize-ss-key.sh        # skip on Proxmox VMs: cloud-init already did this
+./scripts/setup-tailscale.sh --edge  # sign in at the URL, then approve the device in the admin console
 ```
 
-The script will:
-- Install Tailscale if not present
-- Prompt you to authenticate Tailscale
-- Pull keys from remote server
+Then, from a trusted machine, provision it (age key, optional GitHub deploy key) and, on dev
+workstations, set up GitHub access. See [SSH-BOOTSTRAP-NOTES.md](../SSH-BOOTSTRAP-NOTES.md).
 
 ## 5. Install Zap (Zsh Plugin Manager)
 
