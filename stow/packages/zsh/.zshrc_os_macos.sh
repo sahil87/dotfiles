@@ -12,7 +12,7 @@ NVM_SOURCE="/opt/homebrew/opt/nvm"
 export PNPM_HOME="/Users/sahil/Library/pnpm"
 OS_PATH_EXTRAS=(/opt/homebrew/bin)
 
-# Ollama runs on the Mac Mini, bound to its Tailscale IP (lifetracker: guides/macmini/llm-serving.md).
+# Ollama runs on the Mac Mini, bound to its Tailscale IP (lifetracker: guides/tasks/llm-serving-macmini.md).
 # MagicDNS resolves this name on the Mini itself too, so one static value works on every Mac —
 # no `tailscale ip` subprocess on shell start.
 export OLLAMA_HOST=sahils-mac-mini.bat-ordinal.ts.net:11434

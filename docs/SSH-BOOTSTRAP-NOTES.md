@@ -42,3 +42,8 @@ Two kinds of machine:
 ```
 
 The age keys for sops come from the Mac mini too; see `lifetracker/secrets/README.md`.
+
+## After this
+
+The rest of the setup (packages, stow, tools) is in the private `lifetracker` repo, under `guides/`:
+`setup_1trusted/` for your Macs, `setup_2dev/` for VMs you work in, `setup_3edge/` for service VMs.
