@@ -30,7 +30,7 @@ repos:
       - git@github.com:sahil87/homebrew-tap.git
       - git@github.com:sahil87/shll.git
       - git@github.com:sahil87/fab-kit.git
-      - git@github.com:sahil87/run-kit.git
+      - git@github.com:sahil87/hexokit.git
       - git@github.com:sahil87/wt.git
       - git@github.com:sahil87/idea.git
       - git@github.com:sahil87/tu.git
