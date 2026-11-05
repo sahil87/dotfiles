@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-CONFIG_SOURCE="$SCRIPT_DIR/../stow/packages/ssh_linux/.ssh/config"
+# Starter ~/.ssh/config: just enough to clone the private lifetracker repo over SSH. The full config
+# (ssh_linux / ssh_macos) is a stow package in lifetracker; stowing it replaces this file
+# (stowhelper.sh --backup ssh_linux).
 DEST="$HOME/.ssh/config"
 
 RED='\033[0;31m'
@@ -18,10 +19,6 @@ main() {
     echo "=== Copy SSH Config (starter) ==="
     echo
 
-    if [[ ! -f "$CONFIG_SOURCE" ]]; then
-        error "Source config not found: $CONFIG_SOURCE"
-    fi
-
     mkdir -p "$HOME/.ssh"
     chmod 700 "$HOME/.ssh"
 
@@ -32,7 +29,20 @@ main() {
         [[ $REPLY =~ ^[Yy]$ ]] || exit 0
     fi
 
-    cp "$CONFIG_SOURCE" "$DEST"
+    cat > "$DEST" <<'EOF'
+# Starter config from dotfiles/scripts/clone-sshconfig-init.sh. Replaced by the lifetracker stow package.
+Host github.com
+  User git
+  IdentitiesOnly yes
+  IdentityFile ~/.ssh/id_ed25519_github
+  IdentityFile ~/.ssh/id_ed25519_sahil87
+
+Host github.com-work
+  HostName github.com
+  User git
+  IdentitiesOnly yes
+  IdentityFile ~/.ssh/id_ed25519_sahil-noon
+EOF
     chmod 600 "$DEST"
     info "Copied SSH config to $DEST"
 }

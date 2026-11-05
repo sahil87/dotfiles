@@ -1,7 +1,8 @@
 # dotfiles
 
-Public dotfiles (no secrets): shell, git, SSH client and tool configs, installed with GNU Stow, plus the
-scripts a new machine runs before it can reach anything private.
+Public bootstrap scripts (no secrets): what a new machine runs before it can reach anything private. The
+dotfiles themselves (shell, git, SSH client and tool configs, installed with GNU Stow) moved to the private
+`lifetracker` repo, `stow/`, on 2026-11-06.
 
 ## New machine
 
@@ -11,7 +12,6 @@ a trusted machine (SSH key, Tailscale). The full setup guides live in the privat
 
 ## Layout
 
-- `stow/packages/`: the dotfiles, one stow package per tool. See [stow/README.md](stow/README.md).
 - `scripts/`: bootstrap scripts (`authorize-ss-key.sh`, `setup-tailscale.sh`, SSH key/config pulls) and the
   macOS Brewfile (`scripts/macinstall/`).
 

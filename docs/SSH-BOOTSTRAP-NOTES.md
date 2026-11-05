@@ -31,19 +31,20 @@ Two kinds of machine:
    ssh-keygen -t ed25519 -f ~/.ssh/id_ed25519_github -C "$(hostname)"
    gh auth login   # choose SSH, upload ~/.ssh/id_ed25519_github.pub
    ```
-   The `ssh_linux` stow package uses `~/.ssh/id_ed25519_github` for `github.com`.
+   The `ssh_linux` stow package (in `lifetracker`) uses `~/.ssh/id_ed25519_github` for `github.com`.
 
 ## Trusted machines
 
 ```bash
 ./scripts/setup-tailscale.sh       # Install and join the tailnet as your user
 ./scripts/clone-sshkeys-all.sh     # Pull SSH keys (sahil-noon, sahil87, ss) from the Mac mini
-./scripts/clone-sshconfig-init.sh  # Copy a starter ~/.ssh/config (Linux layout)
+./scripts/clone-sshconfig-init.sh  # Write a starter ~/.ssh/config (github.com only), enough to clone lifetracker
 ```
 
 The age keys for sops come from the Mac mini too; see `lifetracker/secrets/README.md`.
 
 ## After this
 
-The rest of the setup (packages, stow, tools) is in the private `lifetracker` repo, under `guides/`:
+The rest of the setup (packages, stow, tools) is in the private `lifetracker` repo: the dotfiles are its
+`stow/`, the guides its `guides/`:
 `setup_1trusted/` for your Macs, `setup_2dev/` for VMs you work in, `setup_3edge/` for service VMs.
