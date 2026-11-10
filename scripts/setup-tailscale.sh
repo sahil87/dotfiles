@@ -2,11 +2,13 @@
 set -euo pipefail
 
 # Install and connect Tailscale
-#   setup-tailscale.sh          join as your user: a TRUSTED device (laptop, Mac mini)
-#   setup-tailscale.sh --edge   join tagged tag:edge (Linux VMs, dev workstations): can't reach trusted devices
-# --edge still opens a login URL; sign in as yourself (a tag owner) and the device joins tagged, not as you.
+#   setup-tailscale.sh               join as your user: a TRUSTED device (laptop, Mac mini)
+#   setup-tailscale.sh --dev         join tagged tag:dev       (dev VMs on your own hardware)
+#   setup-tailscale.sh --dev-cloud   join tagged tag:dev-cloud (dev VMs in an org cloud project)
+#   setup-tailscale.sh --edge        join tagged tag:edge      (service VMs), and turn on Tailscale SSH
+# A tagged join still opens a login URL; sign in as yourself (a tag owner) and the device joins tagged, not as you.
 
-EDGE=false
+TAG=""
 
 RED='\033[0;31m'
 GREEN='\033[0;32m'
@@ -57,22 +59,29 @@ ensure_connected() {
         if [[ "$OSTYPE" == "darwin"* ]]; then
             warn "Please authenticate Tailscale via the menu bar app"
             exit 1
-        elif $EDGE; then
-            sudo tailscale up --advertise-tags=tag:edge
+        elif [[ -n "$TAG" ]]; then
+            sudo tailscale up --advertise-tags="$TAG"
         else
-            warn "Joining as your user makes this a TRUSTED device. For edge machines, re-run with --edge."
+            warn "Joining as your user makes this a TRUSTED device. For other machines, re-run with --dev, --dev-cloud or --edge."
             read -p "Join as your user anyway? (y/N) " -n 1 -r
             echo
             [[ $REPLY =~ ^[Yy]$ ]] || exit 0
             sudo tailscale up
         fi
-    elif $EDGE && ! tailscale status --self --peers=false --json | grep -q '"tag:edge"'; then
-        warn "Already connected, but not as tag:edge. To re-join tagged:"
-        echo "  sudo tailscale up --force-reauth --advertise-tags=tag:edge"
+    elif [[ -n "$TAG" ]] && ! tailscale status --self --peers=false --json | grep -q "\"$TAG\""; then
+        warn "Already connected, but not as $TAG. To re-join tagged:"
+        echo "  sudo tailscale up --force-reauth --advertise-tags=$TAG"
+        exit 1
+    fi
+
+    # Edge VMs run Tailscale's SSH server: personal dev VMs SSH in through it, with no keys on the dev VM.
+    if [[ "$TAG" == "tag:edge" ]]; then
+        info "Turning on Tailscale SSH..."
+        sudo tailscale set --ssh
     fi
 
     info "Tailscale connected"
-    if $EDGE; then
+    if [[ -n "$TAG" ]]; then
         info "If device approval is on, approve this machine in the admin console."
     fi
     tailscale status
@@ -80,15 +89,17 @@ ensure_connected() {
 
 main() {
     case "${1:-}" in
-        --edge) EDGE=true ;;
+        --dev) TAG="tag:dev" ;;
+        --dev-cloud) TAG="tag:dev-cloud" ;;
+        --edge) TAG="tag:edge" ;;
         "") ;;
-        *) error "Unknown option: $1 (usage: setup-tailscale.sh [--edge])" ;;
+        *) error "Unknown option: $1 (usage: setup-tailscale.sh [--dev | --dev-cloud | --edge])" ;;
     esac
-    if $EDGE && [[ "$OSTYPE" == "darwin"* ]]; then
-        error "--edge is for Linux machines; Macs are trusted"
+    if [[ -n "$TAG" && "$OSTYPE" == "darwin"* ]]; then
+        error "$1 is for Linux machines; Macs are trusted"
     fi
 
-    echo "=== Tailscale Setup$($EDGE && echo " (edge)") ==="
+    echo "=== Tailscale Setup${TAG:+ ($TAG)} ==="
     echo
     install_tailscale
     ensure_connected

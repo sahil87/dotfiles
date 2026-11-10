@@ -1,50 +1,43 @@
-# Machine Access Bootstrap
+# Machine bootstrap
 
-This repo is public, so it holds only what a new machine needs to become **reachable from a trusted
-machine** (laptop, Mac mini). Everything after that (age keys, GitHub deploy keys, secrets) is done
-from the private `lifetracker` repo.
+This repo is public, so it holds only what a new machine runs to become **reachable from a trusted
+machine** and to get a checkout of the private `lifetracker` repo. Everything after that (age keys,
+GitHub deploy keys, the dotfiles in `stow/`, the full guides) is in `lifetracker`.
 
-Two kinds of machine:
-- **Trusted**: the Macs. Join Tailscale as your user and hold every key.
-- **Edge**: Linux VMs and dev workstations. Join Tailscale as `tag:edge`, can't reach trusted
-  machines, and never get copies of your personal SSH keys.
+## Which page
 
-## Edge machines
+| Class | Machines | Tailscale identity | Page |
+|---|---|---|---|
+| **Trusted** | Your Macs (laptop, Mac mini) | You (untagged) | [below](#trusted-machines) |
+| **Personal dev** | Dev VMs on your own hardware (Proxmox, Parallels) | `tag:dev` | [bootstrap-dev.md](bootstrap-dev.md) |
+| **Cloud dev** | Dev VMs in an org cloud project, where others have root | `tag:dev-cloud` | [bootstrap-dev-cloud.md](bootstrap-dev-cloud.md) |
+| **Edge** | Service VMs | `tag:edge` | [bootstrap-edge.md](bootstrap-edge.md) |
 
-1. **Let the ss key in.** Trusted machines SSH in with the ss key.
-   - Proxmox VMs: cloud-init installs it; nothing to do.
-   - Anything else (e.g. GCP): log in once through the provider's console, then run on the machine:
-     ```bash
-     curl -fsSL https://raw.githubusercontent.com/sahil87/dotfiles/main/scripts/authorize-ss-key.sh | bash
-     ```
-2. **Join Tailscale as edge** (on the machine, from a clone of this repo):
-   ```bash
-   git clone https://github.com/sahil87/dotfiles.git ~/code/bootstrap/dotfiles
-   ~/code/bootstrap/dotfiles/scripts/setup-tailscale.sh --edge
-   ```
-   Open the login URL, sign in as yourself, and approve the device in the admin console. The
-   device joins tagged, not as you.
-3. **From a trusted machine**: run `secrets/provision-edge.sh <host>` in `lifetracker` (age key;
-   add `--deploy-key` for service VMs that `git pull`).
-4. **Dev workstations only, GitHub access**: give the machine its own key, revocable on its own:
-   ```bash
-   ssh-keygen -t ed25519 -f ~/.ssh/id_ed25519_github -C "$(hostname)"
-   gh auth login   # choose SSH, upload ~/.ssh/id_ed25519_github.pub
-   ```
-   The `ssh_linux` stow package (in `lifetracker`) uses `~/.ssh/id_ed25519_github` for `github.com`.
+Proxmox hosts and the NAS are set up from `lifetracker` only (`guides/setup_4infra/`, `guides/setup_5nas/`).
+
+Access flows **down, never up**: trusted machines SSH into everything else with the ss key, and nothing
+below holds a key or a network path that opens a machine above. What a lower machine can read is decided
+by the age keys a trusted machine pushes to it, so every class can have a `lifetracker` checkout. The model
+in full: `lifetracker/guides/access-model.md`.
+
+Rules for every machine that isn't trusted:
+- Join Tailscale **tagged** (`setup-tailscale.sh --dev | --dev-cloud | --edge`). A plain `tailscale up`
+  joins it as you, a trusted device.
+- It never gets your personal SSH keys (`id_ed25519_sahil87`, `id_ed25519_sahil-noon`, `id_ed25519_ss`).
+- Never forward your SSH agent to it.
+- Keys arrive **pushed** from a trusted machine; the machine never fetches them itself.
 
 ## Trusted machines
 
 ```bash
-./scripts/setup-tailscale.sh       # Install and join the tailnet as your user
-./scripts/clone-sshkeys-all.sh     # Pull SSH keys (sahil-noon, sahil87, ss) from the Mac mini
-./scripts/clone-sshconfig-init.sh  # Write a starter ~/.ssh/config (github.com only), enough to clone lifetracker
+git clone https://github.com/sahil87/dotfiles.git ~/code/bootstrap/dotfiles
+cd ~/code/bootstrap/dotfiles
+./scripts/setup-tailscale.sh       # install and join the tailnet as your user
+./scripts/clone-sshkeys-all.sh     # pull SSH keys (sahil-noon, sahil87, ss) from the Mac mini
+./scripts/clone-sshconfig-init.sh  # starter ~/.ssh/config (github.com only), enough to clone lifetracker
+git clone git@github.com:sahil87/lifetracker.git ~/code/bootstrap/lifetracker
 ```
 
-The age keys for sops come from the Mac mini too; see `lifetracker/secrets/README.md`.
-
-## After this
-
-The rest of the setup (packages, stow, tools) is in the private `lifetracker` repo: the dotfiles are its
-`stow/`, the guides its `guides/`:
-`setup_1trusted/` for your Macs, `setup_2dev/` for VMs you work in, `setup_3edge/` for service VMs.
+`clone-sshkeys-all.sh` pulls from the Mac mini by its Tailscale name; `KEY_SOURCE=<host>` pulls from
+another trusted machine. Then follow `lifetracker/guides/setup_1trusted/` (apps from the Brewfile, stow,
+age keys).

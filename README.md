@@ -6,14 +6,16 @@ dotfiles themselves (shell, git, SSH client and tool configs, installed with GNU
 
 ## New machine
 
-Start with [docs/SSH-BOOTSTRAP-NOTES.md](docs/SSH-BOOTSTRAP-NOTES.md): it makes the machine reachable from
-a trusted machine (SSH key, Tailscale). The full setup guides live in the private `lifetracker` repo
-(`guides/`), which the machine can read once it has GitHub access.
+Start with [docs/SSH-BOOTSTRAP-NOTES.md](docs/SSH-BOOTSTRAP-NOTES.md): it picks the page for the machine's
+class (trusted, personal dev, cloud dev, edge), which makes it reachable from a trusted machine (SSH key,
+Tailscale) and gets it a `lifetracker` checkout. The full setup guides live in the private `lifetracker`
+repo (`guides/`).
 
 ## Layout
 
-- `scripts/`: bootstrap scripts (`authorize-ss-key.sh`, `setup-tailscale.sh`, SSH key/config pulls) and the
-  macOS Brewfile (`scripts/macinstall/`).
+- `scripts/`: bootstrap scripts (`authorize-ss-key.sh`, `setup-tailscale.sh`, SSH key/config pulls). The
+  macOS Brewfile is in `lifetracker` (`scripts/macinstall/`).
+- `docs/`: the bootstrap pages, one per machine class.
 
 ## Contributing to this repo
 

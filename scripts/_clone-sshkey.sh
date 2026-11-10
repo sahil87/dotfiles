@@ -5,7 +5,8 @@
 
 set -euo pipefail
 
-KEY_SOURCE="sahils-mac-mini.bat-ordinal.ts.net"
+# MagicDNS short name: resolves on any tailnet member, keeps the tailnet's domain out of this public repo
+KEY_SOURCE="${KEY_SOURCE:-sahils-mac-mini}"
 
 RED='\033[0;31m'
 GREEN='\033[0;32m'
