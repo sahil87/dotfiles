@@ -1,5 +1,9 @@
 # Dotfiles Repository
 
+This public repo holds only bootstrap scripts. The setup itself (access model, secrets, dotfiles, services,
+machines) lives in the private `lifetracker` repo. If it's checked out, read its agent guide first:
+@~/code/bootstrap/lifetracker/AGENTS.md
+
 ## SECRETS WARNING
 
 **Before ANY commit, verify no secrets are being committed.**
