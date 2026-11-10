@@ -37,13 +37,16 @@ trusted machines*). Run code you don't trust on a cloud dev VM instead.
 4. **Clone lifetracker:**
    ```bash
    ~/code/bootstrap/dotfiles/scripts/clone-sshconfig-init.sh   # starter ~/.ssh/config, enough to clone
+   gh api meta --jq '.ssh_keys[]' | sed 's/^/github.com /' >> ~/.ssh/known_hosts   # GitHub's host keys, over HTTPS
    git clone git@github.com:sahil87/lifetracker.git ~/code/bootstrap/lifetracker
    ```
 
 ## From a trusted machine
 
 `ssh <host>` must work first (the ss key, from cloud-init). Check the host key fingerprint against the VM's
-console before accepting it. Confirm the tag, then copy the keys:
+console before accepting it; on Proxmox the guest agent is that console:
+`qm guest exec <VMID> -- ssh-keygen -lf /etc/ssh/ssh_host_ed25519_key.pub` on the host. Confirm the tag,
+then copy the keys:
 
 ```bash
 ssh <host> 'tailscale status --self --peers=false --json' | grep -o '"tag:trusted"'   # must print it
@@ -51,6 +54,16 @@ ssh <host> 'mkdir -p ~/.config/sops/age ~/.ssh && chmod 700 ~/.config/sops ~/.co
 scp -p ~/.config/sops/age/*.txt <host>:.config/sops/age/
 scp -p ~/.ssh/id_ed25519_ss ~/.ssh/id_ed25519_ss.pub <host>:.ssh/
 ssh <host> 'chmod 600 ~/.config/sops/age/*.txt ~/.ssh/id_ed25519_ss'
+```
+
+Then, from the lifetracker checkout on the trusted machine (scripts and sizing:
+`lifetracker/guides/access-model.md` → *Trusted VMs*):
+
+```bash
+ssh <host> 'DATA_DISK=/dev/disk/by-id/scsi-0QEMU_QEMU_HARDDISK_drive-scsi1 DOCKER_SIZE=60G bash -s' \
+  < scripts/gcp/dev-vm-bootstrap.sh                                   # data disk: /home, docker, /tmp, swap
+ssh <host> 'bash -s' < scripts/linux/trusted-vm-firewall.sh            # over Tailscale: closes the LAN
+ssh <host> 'bash -s' < scripts/linux/desktop-xfce-xrdp.sh              # optional: XFCE + xrdp
 ```
 
 ## Then
