@@ -7,7 +7,7 @@ dotfiles themselves (shell, git, SSH client and tool configs, installed with GNU
 ## New machine
 
 Start with [docs/SSH-BOOTSTRAP-NOTES.md](docs/SSH-BOOTSTRAP-NOTES.md): it picks the page for the machine's
-class (trusted, personal dev, cloud dev, edge), which makes it reachable from a trusted machine (SSH key,
+class (trusted Mac, trusted VM, cloud dev, edge), which makes it reachable from a trusted machine (SSH key,
 Tailscale) and gets it a `lifetracker` checkout. The full setup guides live in the private `lifetracker`
 repo (`guides/`).
 

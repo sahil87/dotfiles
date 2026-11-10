@@ -2,10 +2,10 @@
 set -euo pipefail
 
 # Install and connect Tailscale
-#   setup-tailscale.sh               join as your user: a TRUSTED device (laptop, Mac mini)
-#   setup-tailscale.sh --dev         join tagged tag:dev       (dev VMs on your own hardware)
+#   setup-tailscale.sh               join as your user: a TRUSTED device (laptop)
+#   setup-tailscale.sh --trusted     join tagged tag:trusted   (trusted VMs on your own Proxmox hosts)
 #   setup-tailscale.sh --dev-cloud   join tagged tag:dev-cloud (dev VMs in an org cloud project)
-#   setup-tailscale.sh --edge        join tagged tag:edge      (service VMs), and turn on Tailscale SSH
+#   setup-tailscale.sh --edge        join tagged tag:edge      (service VMs)
 # A tagged join still opens a login URL; sign in as yourself (a tag owner) and the device joins tagged, not as you.
 
 TAG=""
@@ -62,7 +62,7 @@ ensure_connected() {
         elif [[ -n "$TAG" ]]; then
             sudo tailscale up --advertise-tags="$TAG"
         else
-            warn "Joining as your user makes this a TRUSTED device. For other machines, re-run with --dev, --dev-cloud or --edge."
+            warn "Joining as your user makes this a TRUSTED device. For VMs, re-run with --trusted, --dev-cloud or --edge."
             read -p "Join as your user anyway? (y/N) " -n 1 -r
             echo
             [[ $REPLY =~ ^[Yy]$ ]] || exit 0
@@ -74,12 +74,6 @@ ensure_connected() {
         exit 1
     fi
 
-    # Edge VMs run Tailscale's SSH server: personal dev VMs SSH in through it, with no keys on the dev VM.
-    if [[ "$TAG" == "tag:edge" ]]; then
-        info "Turning on Tailscale SSH..."
-        sudo tailscale set --ssh
-    fi
-
     info "Tailscale connected"
     if [[ -n "$TAG" ]]; then
         info "If device approval is on, approve this machine in the admin console."
@@ -89,14 +83,14 @@ ensure_connected() {
 
 main() {
     case "${1:-}" in
-        --dev) TAG="tag:dev" ;;
+        --trusted) TAG="tag:trusted" ;;
         --dev-cloud) TAG="tag:dev-cloud" ;;
         --edge) TAG="tag:edge" ;;
         "") ;;
-        *) error "Unknown option: $1 (usage: setup-tailscale.sh [--dev | --dev-cloud | --edge])" ;;
+        *) error "Unknown option: $1 (usage: setup-tailscale.sh [--trusted | --dev-cloud | --edge])" ;;
     esac
     if [[ -n "$TAG" && "$OSTYPE" == "darwin"* ]]; then
-        error "$1 is for Linux machines; Macs are trusted"
+        error "$1 is for Linux VMs. Macs are trusted and join through the Tailscale app (the mini is tagged tag:trusted in the admin console)"
     fi
 
     echo "=== Tailscale Setup${TAG:+ ($TAG)} ==="

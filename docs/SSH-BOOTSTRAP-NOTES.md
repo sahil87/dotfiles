@@ -8,8 +8,8 @@ GitHub deploy keys, the dotfiles in `stow/`, the full guides) is in `lifetracker
 
 | Class | Machines | Tailscale identity | Page |
 |---|---|---|---|
-| **Trusted** | Your Macs (laptop, Mac mini) | You (untagged) | [below](#trusted-machines) |
-| **Personal dev** | Dev VMs on your own hardware (Proxmox, Parallels) | `tag:dev` | [bootstrap-dev.md](bootstrap-dev.md) |
+| **Trusted** | Your Macs (laptop, Mac mini) | You (untagged); the mini `tag:trusted` | [below](#trusted-machines) |
+| **Trusted** | VMs on your own Proxmox hosts (agent orchestration) | `tag:trusted` | [bootstrap-trusted-vm.md](bootstrap-trusted-vm.md) |
 | **Cloud dev** | Dev VMs in an org cloud project, where others have root | `tag:dev-cloud` | [bootstrap-dev-cloud.md](bootstrap-dev-cloud.md) |
 | **Edge** | Service VMs | `tag:edge` | [bootstrap-edge.md](bootstrap-edge.md) |
 
@@ -21,7 +21,7 @@ by the age keys a trusted machine pushes to it, so every class can have a `lifet
 in full: `lifetracker/guides/access-model.md`.
 
 Rules for every machine that isn't trusted:
-- Join Tailscale **tagged** (`setup-tailscale.sh --dev | --dev-cloud | --edge`). A plain `tailscale up`
+- Join Tailscale **tagged** (`setup-tailscale.sh --dev-cloud | --edge`). A plain `tailscale up`
   joins it as you, a trusted device.
 - It never gets your personal SSH keys (`id_ed25519_sahil87`, `id_ed25519_sahil-noon`, `id_ed25519_ss`).
 - Never forward your SSH agent to it.
