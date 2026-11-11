@@ -65,5 +65,5 @@ straight to step 3.
 
 ## Then
 
-Continue with `lifetracker/guides/setup_2dev/gcp.md` step 6 (the common dev steps: Zap, stow, Homebrew,
-tools), and its step 7 for a runner service.
+Continue with `lifetracker/guides/setup_2dev/gcp.md` step 6 (the common dev steps, in order: Zap, stow and
+zsh, Homebrew, Docker, a fresh login, tools, HexoKit last), and its step 7 for a runner service.

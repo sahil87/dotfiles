@@ -68,7 +68,8 @@ ssh <host> 'bash -s' < scripts/linux/desktop-xfce-xrdp.sh              # optiona
 
 ## Then
 
-Continue with `lifetracker/guides/setup_2dev/ubuntu-common.md` from step 5 (Zap, stow, Homebrew, tools).
+Continue with `lifetracker/guides/setup_2dev/ubuntu-common.md` from step 5, in order (Zap, stow and zsh,
+Homebrew, Docker, a fresh login, tools). Start HexoKit last (its step 13), so its sessions get zsh and Docker.
 Once Homebrew is in, install the gitleaks hook in both repos this VM can push to:
 
 ```bash
