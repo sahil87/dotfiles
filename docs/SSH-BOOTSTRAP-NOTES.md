@@ -33,11 +33,14 @@ Rules for every machine that isn't trusted:
 git clone https://github.com/sahil87/dotfiles.git ~/code/bootstrap/dotfiles
 cd ~/code/bootstrap/dotfiles
 ./scripts/setup-tailscale.sh       # install and join the tailnet as your user
-./scripts/clone-sshkeys-all.sh     # pull SSH keys (sahil-noon, sahil87, ss) from the Mac mini
+./scripts/clone-sshkeys-all.sh     # pull the ss key from the Mac mini
+for a in sahil87 sahil-noon; do ssh-keygen -t ed25519 -N "" -C "$a@$(hostname -s)-$(date +%F)" -f ~/.ssh/id_ed25519_$a; done
+# add each .pub to its own GitHub account (Settings → SSH keys), titled after this machine
 ./scripts/clone-sshconfig-init.sh  # starter ~/.ssh/config (github.com only), enough to clone lifetracker
 git clone git@github.com:sahil87/lifetracker.git ~/code/bootstrap/lifetracker
 ```
 
 `clone-sshkeys-all.sh` pulls from the Mac mini by its Tailscale name; `KEY_SOURCE=<host>` pulls from
-another trusted machine. Then follow `lifetracker/guides/setup_1trusted/` (apps from the Brewfile, stow,
+another trusted machine. GitHub keys are one per machine per account (GitHub refuses one key on two
+accounts), so removing one machine's keys cuts off only that machine. Then follow `lifetracker/guides/setup_1trusted/` (apps from the Brewfile, stow,
 age keys).

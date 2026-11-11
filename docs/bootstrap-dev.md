@@ -8,7 +8,7 @@ everything on the VM as **visible to the org**, and the machine as one an org ad
 | The `dev` age key only: secrets the org may see | The `trusted` key or any per-machine key (`stss`, …) |
 | A **read-only** deploy key for `lifetracker` (its checkout holds the dotfiles) | Push access to `dotfiles` or `lifetracker` |
 | Its own GitHub SSH key and `gh` login as the **work** account | Your personal SSH keys, the ss private key |
-| Personal-account repos only through a fine-grained token with an expiry, never `dotfiles` or `lifetracker` | A forwarded SSH agent, ever: root here could use your keys while you're connected |
+| Personal-account repos only where the work account is added as a collaborator, never `dotfiles` or `lifetracker` | A forwarded SSH agent, ever: root here could use your keys while you're connected |
 
 Over Tailscale it reaches **only** the runner services hosted on dev VMs. Trusted machines reach it;
 nothing else does.
