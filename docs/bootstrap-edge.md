@@ -5,7 +5,7 @@ services are exposed, so assume it **may be compromised**.
 
 | Gets | Never gets |
 |---|---|
-| Its own per-machine age key, if its service has secrets (there's no shared edge key) | The `trusted` or `dev-cloud` keys |
+| Its own per-machine age key, if its service has secrets (there's no shared edge key) | The `trusted` or `dev` keys |
 | A **read-only** deploy key for `lifetracker`, if it `git pull`s its service config | A GitHub login, personal API tokens, your personal SSH keys, the ss private key |
 
 Over Tailscale it reaches the NAS (SMB) and whatever its service needs, one grant per need. Only trusted

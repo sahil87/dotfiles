@@ -1,16 +1,16 @@
-# Cloud dev VM
+# Dev VM
 
 A dev VM in an org cloud project. Everyone with SSH rights on the project has root on it, so treat
 everything on the VM as **visible to the org**, and the machine as one an org admin can impersonate.
 
 | Gets | Never gets |
 |---|---|
-| The `dev-cloud` age key only: secrets the org may see | The `dev`, `edge` or `trusted` keys |
+| The `dev` age key only: secrets the org may see | The `trusted` key or any per-machine key (`stss`, …) |
 | A **read-only** deploy key for `lifetracker` (its checkout holds the dotfiles) | Push access to `dotfiles` or `lifetracker` |
 | Its own GitHub SSH key and `gh` login as the **work** account | Your personal SSH keys, the ss private key |
 | Personal-account repos only through a fine-grained token with an expiry, never `dotfiles` or `lifetracker` | A forwarded SSH agent, ever: root here could use your keys while you're connected |
 
-Over Tailscale it reaches **only** the runner services hosted on cloud dev VMs. Trusted machines reach it;
+Over Tailscale it reaches **only** the runner services hosted on dev VMs. Trusted machines reach it;
 nothing else does.
 
 ## Create it and log in through the provider
@@ -36,10 +36,10 @@ straight to step 3.
    git clone https://github.com/sahil87/dotfiles.git ~/code/bootstrap/dotfiles
    ```
 
-3. **Join Tailscale as `tag:dev-cloud`**, in an interactive session (the login URL only shows up reliably
+3. **Join Tailscale as `tag:dev`**, in an interactive session (the login URL only shows up reliably
    there):
    ```bash
-   ~/code/bootstrap/dotfiles/scripts/setup-tailscale.sh --dev-cloud
+   ~/code/bootstrap/dotfiles/scripts/setup-tailscale.sh --dev
    ```
    Open the URL, sign in as yourself, approve the device in the admin console.
 
@@ -58,9 +58,9 @@ straight to step 3.
 
 2. **Provision**, in `lifetracker`:
    ```bash
-   secrets/provision.sh dev-cloud <host>
+   secrets/provision.sh dev <host>
    ```
-   It refuses unless the host is tagged `tag:dev-cloud`. Then it pushes the `dev-cloud` key and nothing else,
+   It refuses unless the host is tagged `tag:dev`. Then it pushes the `dev` key and nothing else,
    registers a read-only deploy key for `lifetracker`, and clones it to `~/code/bootstrap/lifetracker` on the VM.
 
 ## Then

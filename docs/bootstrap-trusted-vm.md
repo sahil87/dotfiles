@@ -3,7 +3,7 @@
 A VM on your own Proxmox host, mainly for agent orchestration. It is **trusted**: it holds what
 your Macs hold (the ss key, every age key), so it reaches and can run everything. Agents running here are
 inside the trusted boundary, and that's an accepted risk (`lifetracker/guides/access-model.md`, *Agents on
-trusted machines*). Run code you don't trust on a cloud dev VM instead.
+trusted machines*). Run code you don't trust on a dev VM instead.
 
 | Gets | Never gets |
 |---|---|
